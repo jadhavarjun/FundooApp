@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 //get post method imported
-require('./Routes/routesNote.js')(app);
+require('./Routes/routes')(app);
 
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");

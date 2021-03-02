@@ -7,14 +7,10 @@ module.exports = class Controller {
         try {
             objService.insert(req.body)
                 .then((result) => {
-                    console.log(req.body);
-                    response.success = true;
-                    response.message = result.message;
-                    res.status(200).send(response);
+                    //console.log(req.body);
+                    res.send(result);
                 }).catch((err) => {
-                    response.success = false;
-                    response.data = err.message;
-                    res.status(400).send(response);
+                    res.send(err);
                 });
         } catch (error) {
             console.log(error);
@@ -38,6 +34,18 @@ module.exports = class Controller {
 
         }
     }
-    
+
+    login(req, res) {
+        try {
+            objService.login(req.body)
+            .then((result) => {
+                res.send(result);
+            }).catch((err) => {
+                res.send(err);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 }

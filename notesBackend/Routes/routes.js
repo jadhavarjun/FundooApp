@@ -1,13 +1,9 @@
 const Controller = require('../Controller/userController')
-let controller = new Controller()
+let userController = new Controller()
 module.exports = (app) => {
-    app.get("/notes/get", controller.getData)
+    app.get("/userData/get", userController.getData)
 
-    // app.post("/employee/getById/:id", controller.findById)
+    app.post("/user/registration", userController.create)
 
-    app.post("/notes/create", controller.create)
-
-    // app.put("/employee/update/:id", controller.updateData)
-
-    // app.delete("/employee/delete/:id", controller.deleteData)
+    app.post("/user/login", userController.login)
 } 
