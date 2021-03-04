@@ -3,7 +3,7 @@ const hashPassword = require('../Middleware/hashPassword');
 const empModel = require('../Model/userModel');
 const statusCode = require('../Middleware/httpStatusCode.json');
 const logger = require('../Middleware/winstenLogger');
-const jwt = require('jsonwebtoken');
+const jwtToken = require('../Middleware/jwtToken');
 
 
 const objempModel = new empModel();
@@ -31,7 +31,7 @@ module.exports = class EmployeeService {
                 }
             })
             .catch((error) => {
-                // console.log("==========================");
+                return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
             })
     }
 
@@ -52,18 +52,28 @@ module.exports = class EmployeeService {
         return objempModel.findOne(email)
             .then((result) => {
                 if (result) {
-                    return bcrypt.compare(password, result.password)
+                   return hashPassword.comparePassword(password, result.password)
                         .then((res) => {
                             if (res) {
                                 let tokenData = {
                                     mail: result.email,
                                     passsword: result.password
                                 }
-                                var token = jwt.sign(tokenData, 'shhhhh');
-                                return ({ flag: true, message: "User Login Successfully!!", data: result, status: statusCode.OK, jwtToken:token });
+                                let token = jwtToken.jwtToken(tokenData);
+                                let dataObj = new Object();
+                                dataObj._id = result._id;
+                                dataObj.firstName = result.firstName;
+                                dataObj.lastName = result.lastName;
+                                dataObj.email = result.email;
+                                dataObj.password = result.password;
+                                dataObj.token = token;
+                                // dataObj = result;
+                                // dataObj.token = token;
+                                console.log("''''''''''''''", dataObj);
+                                return ({ flag: true, message: "User Login Successfully!!", data: dataObj, status: statusCode.OK });
                             }
                             else {
-                                return ({ flag: false, message: "Password is Wrong", status: statusCode.NotFound });
+                                return ({ flag: false, message: "Password is Wrong", status: statusCode.Unauthorized });
                             }
 
                         });

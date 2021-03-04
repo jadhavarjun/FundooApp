@@ -7,25 +7,9 @@ class userHashPassword {
         return hash;
     }
     //dcrypt
-    comparePassword =(password, hash,next)=>{
-        try{
-            return new Promise((resolve,reject)=>{
-                bcrypt.compare(password, hash).then(data=>{
-                    resolve(data ?true:false);
-                }).catch(err=>{
-                    reject(err)
-                })
-            })
-
-        }catch(error){
-            next(error)
-        }
-
-    // decryptPassword(password, hash) {
-    //     return bcrypt.compare(password, hash)
-    //         .then((result) => {
-    //             return result;
-    //         });
+    comparePassword(password, hash) {
+        let result = bcrypt.compare(password, hash)
+        return result;
     }
 }
 module.exports = new userHashPassword();

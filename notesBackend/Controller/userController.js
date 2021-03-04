@@ -47,7 +47,7 @@ module.exports = class Controller {
                 response.flag = true;
                 response.message = result.message;
                 response.data = result.data;
-                response.jwtToken = result.jwtToken;
+                // response.jwtToken = result.jwtToken;
                 res.status(statusCode.OK).send(response);
             }).catch((err) => {
                 response.flag = false;
