@@ -4,6 +4,7 @@ const empModel = require('../Model/userModel');
 const statusCode = require('../Middleware/httpStatusCode.json');
 const logger = require('../Middleware/winstenLogger');
 const jwtToken = require('../Middleware/jwtToken');
+const mailler = require('../Middleware/nodemailler')
 
 
 const objempModel = new empModel();
@@ -52,7 +53,7 @@ module.exports = class EmployeeService {
         return objempModel.findOne(email)
             .then((result) => {
                 if (result) {
-                   return hashPassword.comparePassword(password, result.password)
+                    return hashPassword.comparePassword(password, result.password)
                         .then((res) => {
                             if (res) {
                                 let tokenData = {
@@ -84,6 +85,29 @@ module.exports = class EmployeeService {
 
             })
 
+    }
+
+    //forget Password
+    forgetPassword(data) {
+        let email = data.email;
+        try {
+            let tokenData = {
+                mail: email
+            }
+            return objempModel.findOne(email)
+                .then((result) => {
+                    if (result) {
+                        let token = jwtToken.jwtToken(tokenData);
+                        mailler.mailer(email, token)
+                        return ({ flag: true, message: "Please Check Your Mail For Reset Password!!", status: statusCode.OK });
+                    } else {
+                        return ({ flag: false, message: "Email Not Exist Please Enter Valid Mail", status: statusCode.NotFound });
+                    }
+                })
+           
+        } catch (error) {
+
+        }
     }
 
 }

@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.18",
     "mongoose-unique-validator": "^2.0.3",
+    "nodemailer": "^6.5.0",
     "validator": "^13.5.2",
     "winston": "^3.3.3"
   }

@@ -59,4 +59,22 @@ module.exports = class Controller {
         }
     }
 
+    forgetPassword(req, res){
+        try {
+            console.log("Controlle...............")
+            objService.forgetPassword(req.body)
+            .then((result) => {
+                response.flag = true;
+                response.message = result.message;
+                res.status(statusCode.OK).send(response);
+            }).catch((err) => {
+                response.flag = false;
+                response.data = err.message;
+                res.status(statusCode.BadRequest).send(response);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 }
