@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 const hashPassword = require('../Middleware/hashPassword');
 const empModel = require('../Model/userModel');
 const statusCode = require('../Middleware/httpStatusCode.json');
-const logger = require('../Middleware/winstenLogger')
+const logger = require('../Middleware/winstenLogger');
+const jwt = require('jsonwebtoken');
 
 
 const objempModel = new empModel();
@@ -54,7 +55,12 @@ module.exports = class EmployeeService {
                     return bcrypt.compare(password, result.password)
                         .then((res) => {
                             if (res) {
-                                return ({ flag: true, message: "User Login Successfully!!", data: result, status: statusCode.OK });
+                                let tokenData = {
+                                    mail: result.email,
+                                    passsword: result.password
+                                }
+                                var token = jwt.sign(tokenData, 'shhhhh');
+                                return ({ flag: true, message: "User Login Successfully!!", data: result, status: statusCode.OK, jwtToken:token });
                             }
                             else {
                                 return ({ flag: false, message: "Password is Wrong", status: statusCode.NotFound });

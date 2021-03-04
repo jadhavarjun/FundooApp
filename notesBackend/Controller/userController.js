@@ -1,4 +1,5 @@
 const sampleService = require('../Service/userService');
+const statusCode = require('../Middleware/httpStatusCode.json')
 
 const objService = new sampleService();
 const response = {};
@@ -7,10 +8,14 @@ module.exports = class Controller {
         try {
             objService.insert(req.body)
                 .then((result) => {
-                    //console.log(req.body);
-                    res.send(result);
+                    response.data = result.data;
+                    response.flag = true;
+                    response.message = result.message;
+                    res.status(statusCode.OK).send(response);
                 }).catch((err) => {
-                    res.send(err);
+                    response.flag = false;
+                    response.data = err.message;
+                    res.status(statusCode.BadRequest).send(response);
                 });
         } catch (error) {
             console.log(error);
@@ -21,13 +26,13 @@ module.exports = class Controller {
             objService.findAll()
                 .then((result) => {
                     response.data = result.data;
-                    response.success = true;
+                    response.flag = true;
                     response.message = result.message;
-                    res.status(200).send(response);
+                    res.status(statusCode.OK).send(response);
                 }).catch((err) => {
-                    response.success = false;
+                    response.flag = false;
                     response.data = err.message;
-                    res.status(400).send(response);
+                    res.status(statusCode.BadRequest).send(response);
                 });
         } catch (error) {
             console.log(error);
@@ -39,9 +44,15 @@ module.exports = class Controller {
         try {
             objService.login(req.body)
             .then((result) => {
-                res.send(result);
+                response.flag = true;
+                response.message = result.message;
+                response.data = result.data;
+                response.jwtToken = result.jwtToken;
+                res.status(statusCode.OK).send(response);
             }).catch((err) => {
-                res.send(err);
+                response.flag = false;
+                response.data = err.message;
+                res.status(statusCode.BadRequest).send(response);
             });
         } catch (error) {
             console.error(error);
