@@ -11,7 +11,6 @@ const objempModel = new empModel();
 
 module.exports = class EmployeeService {
     insert(data) {
-        // console.log(statusCode);
         let hash = hashPassword.hashPassword(data.password);
         data.password = hash;
         return objempModel.findOne(data.email)
@@ -58,7 +57,7 @@ module.exports = class EmployeeService {
                             if (res) {
                                 let tokenData = {
                                     mail: result.email,
-                                    passsword: result.password
+                                    id: result._id
                                 }
                                 let token = jwtToken.jwtToken(tokenData);
                                 let dataObj = new Object();
@@ -70,7 +69,7 @@ module.exports = class EmployeeService {
                                 dataObj.token = token;
                                 // dataObj = result;
                                 // dataObj.token = token;
-                                console.log("''''''''''''''", dataObj);
+
                                 return ({ flag: true, message: "User Login Successfully!!", data: dataObj, status: statusCode.OK });
                             }
                             else {
@@ -84,7 +83,6 @@ module.exports = class EmployeeService {
                 }
 
             })
-
     }
 
     //forget Password
@@ -92,7 +90,7 @@ module.exports = class EmployeeService {
         let email = data.email;
         try {
             let tokenData = {
-                mail: email
+               email: email
             }
             return objempModel.findOne(email)
                 .then((result) => {
@@ -104,10 +102,24 @@ module.exports = class EmployeeService {
                         return ({ flag: false, message: "Email Not Exist Please Enter Valid Mail", status: statusCode.NotFound });
                     }
                 })
-           
-        } catch (error) {
 
+        } catch (error) {
+            return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
         }
     }
-
+    resetPassword(email, password)
+    {
+        let hash = hashPassword.hashPassword(password);
+        return objempModel.resetPassword(email, hash)
+        .then((result) => {
+            if (result) {
+                return ({ flag: true, message: "Password has been successfully Changed!!", status: statusCode.OK });
+            } else {
+                return ({ flag: false, message: "Something Went Wrong Please Do Forget Password Again!!", status: statusCode.BadRequest });
+            }
+        }).catch((err) => {
+            return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
+        });
+        
+    }
 }

@@ -1,5 +1,6 @@
 const sampleService = require('../Service/userService');
 const statusCode = require('../Middleware/httpStatusCode.json')
+require('dotenv').config()
 
 const objService = new sampleService();
 const response = {};
@@ -61,7 +62,6 @@ module.exports = class Controller {
 
     forgetPassword(req, res){
         try {
-            console.log("Controlle...............")
             objService.forgetPassword(req.body)
             .then((result) => {
                 response.flag = true;
@@ -76,5 +76,26 @@ module.exports = class Controller {
             console.error(error);
         }
     }
+    resetPassword(req, res){
+        try {
+            console.log("reset password '''''''''''''''''''''");
+            console.log(req.decoded.email);
+            let password = req.body.password;
+            let email = req.decoded.email;
+            objService.resetPassword(email, password)
+            .then((result) => {
+                response.flag = true;
+                response.message = result.message;
+                res.status(statusCode.OK).send(response);
+            }).catch((err) => {
+                response.flag = false;
+                response.data = err.message;
+                res.status(statusCode.BadRequest).send(response);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
 }

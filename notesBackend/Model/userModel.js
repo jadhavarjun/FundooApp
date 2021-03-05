@@ -33,7 +33,7 @@ module.exports = class EmployeeModel {
                 return result;
             })
             .catch((error) => {
-                return error;
+                return ({ message: "Something Went Wrong Please Check", error: error });
             })
     }
 
@@ -56,7 +56,16 @@ module.exports = class EmployeeModel {
             .catch((error) => {
                 return ({ message: "Something Went Wrong Please Check", error: error });
             })
+    }
 
+    resetPassword(email, password) {
+        return notesModel.updateOne({email: email},{$set:{password: password}})
+        .then((result) => {
+            return result;
+        }).catch((err) => {
+            return ({ message: "Something Went Wrong Please Check", error: error });
+        });
+           
     }
 
 
