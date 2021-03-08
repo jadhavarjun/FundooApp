@@ -46,3 +46,11 @@
 {"message":"login token has verified","level":"info","timestamp":"2021-03-05T19:41:38.433Z"}
 {"message":"invalid token or token has expired","level":"error","timestamp":"2021-03-05T19:42:50.428Z"}
 {"message":"invalid token or token has expired","level":"error","timestamp":"2021-03-05T19:43:27.549Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-05T19:53:10.033Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-05T19:53:29.885Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-05T19:56:10.214Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-06T05:38:34.202Z"}
+{"message":"{\"success\":false,\"message\":\"you have filled invalid data\",\"error\":[{\"value\":\"\",\"msg\":\"Password is Required!\",\"param\":\"password\",\"location\":\"body\"},{\"value\":\"\",\"msg\":\"Password atleast contains  6 character!\",\"param\":\"password\",\"location\":\"body\"}]}","level":"error","timestamp":"2021-03-08T16:36:48.318Z"}
+{"message":"{\"success\":false,\"message\":\"something went Wrong\",\"error\":[{\"value\":\"\",\"msg\":\"Password is Required!\",\"param\":\"password\",\"location\":\"body\"},{\"value\":\"\",\"msg\":\"Password atleast contains  6 character!\",\"param\":\"password\",\"location\":\"body\"}]}","level":"error","timestamp":"2021-03-08T16:36:48.355Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-08T16:41:20.949Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-08T16:41:35.765Z"}

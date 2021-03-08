@@ -45,11 +45,11 @@ module.exports = class Controller {
         try {
             objService.login(req.body)
             .then((result) => {
-                response.flag = true;
+                response.sucess = result.flag;
                 response.message = result.message;
                 response.data = result.data;
                 // response.jwtToken = result.jwtToken;
-                res.status(statusCode.OK).send(response);
+                res.status(result.status).send(response);
             }).catch((err) => {
                 response.flag = false;
                 response.data = err.message;
@@ -78,8 +78,6 @@ module.exports = class Controller {
     }
     resetPassword(req, res){
         try {
-            console.log("reset password '''''''''''''''''''''");
-            console.log(req.decoded.email);
             let password = req.body.password;
             let email = req.decoded.email;
             objService.resetPassword(email, password)

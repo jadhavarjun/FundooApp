@@ -17,7 +17,7 @@ module.exports.mailer = (email, token) => {
             subject: "nodemailer",
             html: 'Please click on the following link for reset password   ' + link
         }
-
+        // verify connection configuration
     transporter.sendMail(mailOption, (error, info) => {
         if (error) {
             return console.log(error)
