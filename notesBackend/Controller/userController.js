@@ -12,11 +12,11 @@ module.exports = class Controller {
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
-                    res.status(statusCode.OK).send(response);
+                    res.status(result.status).send(response);
                 }).catch((err) => {
                     response.flag = false;
                     response.data = err.message;
-                    res.status(statusCode.BadRequest).send(response);
+                    res.status(err.status).send(response);
                 });
         } catch (error) {
             console.log(error);
@@ -29,11 +29,11 @@ module.exports = class Controller {
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
-                    res.status(statusCode.OK).send(response);
+                    res.status(result.status).send(response);
                 }).catch((err) => {
                     response.flag = false;
                     response.data = err.message;
-                    res.status(statusCode.BadRequest).send(response);
+                    res.status(err.status).send(response);
                 });
         } catch (error) {
             console.log(error);
@@ -53,7 +53,7 @@ module.exports = class Controller {
             }).catch((err) => {
                 response.flag = false;
                 response.data = err.message;
-                res.status(statusCode.BadRequest).send(response);
+                res.status(err.status).send(response);
             });
         } catch (error) {
             console.error(error);
@@ -66,11 +66,11 @@ module.exports = class Controller {
             .then((result) => {
                 response.flag = true;
                 response.message = result.message;
-                res.status(statusCode.OK).send(response);
+                res.status(result.status).send(response);
             }).catch((err) => {
                 response.flag = false;
                 response.data = err.message;
-                res.status(statusCode.BadRequest).send(response);
+                res.status(err.status).send(response);
             });
         } catch (error) {
             console.error(error);
@@ -84,11 +84,11 @@ module.exports = class Controller {
             .then((result) => {
                 response.flag = true;
                 response.message = result.message;
-                res.status(statusCode.OK).send(response);
+                res.status(result.status).send(response);
             }).catch((err) => {
                 response.flag = false;
                 response.data = err.message;
-                res.status(statusCode.BadRequest).send(response);
+                res.status(err.status).send(response);
             });
         } catch (error) {
             console.error(error);

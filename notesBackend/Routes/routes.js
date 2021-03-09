@@ -3,6 +3,8 @@ const validate = require('../Middleware/validate');
 const validator = require('../Middleware/validator');
 const jwtToken = require("../Middleware/jwtToken");
 
+const noteController = require('../Controller/noteController')
+
 let userController = new Controller()
 module.exports = (app) => {
     app.get("/user/get", userController.getData)
@@ -13,5 +15,9 @@ module.exports = (app) => {
 
     app.post("/user/forgetpassword",userController.forgetPassword)
 
-    app.post("/resetPassword/:token",jwtToken.tokenVerify,userController.resetPassword)
+    app.post("/resetPassword/:token",jwtToken.forgetVerify,userController.resetPassword)
+
+    //notes routes
+    app.post("/note/create",jwtToken.tokenVerify,noteController.noteCreate)
+    app.get("/note/getallnote", noteController.noteGetData)
 } 

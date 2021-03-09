@@ -22,7 +22,6 @@ module.exports = class EmployeeService {
                     return objempModel.create(data)
                         .then((result) => {
                             logger.info('login token has verified')
-                            console.log("'''''''''''''''''''''''''''''''''''''''", result);
                             return ({ success: true, message: "Employee Record insert Successfully", data: result, status: statusCode.OK });
                         })
                         .catch((error) => {
@@ -30,19 +29,16 @@ module.exports = class EmployeeService {
                         })
                 }
             })
-            .catch((error) => {
-                return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
-            })
     }
 
     findAll() {
         return objempModel.findAll()
             .then((result) => {
                 logger.info('Data Get Successfullly')
-                return ({ message: "Employee Record", data: result });
+                return ({ message: "Employee Record", data: result, status:statusCode.OK});
             })
             .catch((error) => {
-                return ({ message: "Thier is No Employee record", error: error });
+                return ({ message: "Thier is No Employee record", error: error, status:statusCode.NotFound });
             })
     }
     //login
@@ -88,7 +84,7 @@ module.exports = class EmployeeService {
     //forget Password
     forgetPassword(data) {
         let email = data.email;
-        try {
+        
             let tokenData = {
                email: email
             }
@@ -102,10 +98,6 @@ module.exports = class EmployeeService {
                         return ({ flag: false, message: "Email Not Exist Please Enter Valid Mail", status: statusCode.NotFound });
                     }
                 })
-
-        } catch (error) {
-            return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
-        }
     }
     resetPassword(email, password)
     {
