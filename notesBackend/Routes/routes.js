@@ -13,11 +13,14 @@ module.exports = (app) => {
 
     app.post("/user/login",validator.login,validate.validation, userController.login)
 
-    app.post("/user/forgetpassword",userController.forgetPassword)
+    app.post("/user/forgetpassword",validator.forgetPassword,validate.validation,userController.forgetPassword)
 
-    app.post("/resetPassword/:token",jwtToken.forgetVerify,userController.resetPassword)
+    app.post("/resetPassword/:token",jwtToken.forgetVerify,validator.forgetPassword,validate.validation,userController.resetPassword)
 
     //notes routes
     app.post("/note/create",jwtToken.tokenVerify,noteController.noteCreate)
     app.get("/note/getallnote", noteController.noteGetData)
+    app.put("/note/update/:id",jwtToken.tokenVerify,noteController.updateNote)
+    app.delete("/note/delete/:id", jwtToken.tokenVerify, noteController.deleteNote)
+    app.post("/note/get-user-notes", jwtToken.tokenVerify, noteController.getUserAllNotes)
 } 

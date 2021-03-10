@@ -24,7 +24,37 @@ class NoteService {
                 return ({ message: "Employee Record", data: result, status: statusCode.OK });
             })
             .catch((error) => {
-                return ({ message: "Thier is No Employee record", error: error, status: statusCode.OK });
+                return ({ message: "Thier is No Employee record", error: error, status: statusCode.NotFound });
+            })
+    }
+
+    updateNote(id, newData) {
+        console.log("service update ''''''''''''''''''");
+        return noteModel.updateNote(id, newData)
+            .then((result) => {
+                return ({ message: "Notes Update Successfully", data: result, status: statusCode.OK });
+            })
+            .catch((error) => {
+                return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
+            })
+    }
+
+    deleteNote(id) {
+        return noteModel.deleteNote(id)
+            .then((result) => {
+                return ({ message: "Note Deleted Successfully", data: result, status: statusCode.OK });
+            })
+            .catch((error) => {
+                return ({ message: "Note Record is Not found", error: error, status: statusCode.NotFound });
+            })
+    }
+    getUserAllNotes(id) {
+        return noteModel.getUserAllNotes(id)
+            .then((result) => {
+                return ({ message: "User All Notes Successfully", data: result, status: statusCode.OK });
+            })
+            .catch((error) => {
+                return ({ message: "Note Record is Not found", error: error, status: statusCode.NotFound });
             })
     }
 }

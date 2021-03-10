@@ -100,3 +100,78 @@
 {"message":"{\"success\":false,\"message\":\"you have filled invalid data\",\"error\":[{\"value\":\"@143\",\"msg\":\"Password atleast contains  6 character!\",\"param\":\"password\",\"location\":\"body\"}]}","level":"error","timestamp":"2021-03-09T04:53:00.526Z"}
 {"message":"{\"success\":false,\"message\":\"something went Wrong\",\"error\":[{\"value\":\"@143\",\"msg\":\"Password atleast contains  6 character!\",\"param\":\"password\",\"location\":\"body\"}]}","level":"error","timestamp":"2021-03-09T04:53:00.527Z"}
 {"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T05:08:10.564Z"}
+{"message":"{\"success\":false,\"message\":\"you have filled invalid data\",\"error\":[{\"value\":\"patilpradipgmail.com\",\"msg\":\"Email is Invalid!!!\",\"param\":\"email\",\"location\":\"body\"}]}","level":"error","timestamp":"2021-03-09T11:28:46.156Z"}
+{"message":"{\"success\":false,\"message\":\"something went Wrong\",\"error\":[{\"value\":\"patilpradipgmail.com\",\"msg\":\"Email is Invalid!!!\",\"param\":\"email\",\"location\":\"body\"}]}","level":"error","timestamp":"2021-03-09T11:28:46.163Z"}
+{"message":"{\"success\":false,\"message\":\"you have filled invalid data\",\"error\":[{\"value\":\"\",\"msg\":\"Email is Required!\",\"param\":\"email\",\"location\":\"body\"},{\"value\":\"\",\"msg\":\"Email is Invalid!!!\",\"param\":\"email\",\"location\":\"body\"}]}","level":"error","timestamp":"2021-03-09T11:29:15.733Z"}
+{"message":"{\"success\":false,\"message\":\"something went Wrong\",\"error\":[{\"value\":\"\",\"msg\":\"Email is Required!\",\"param\":\"email\",\"location\":\"body\"},{\"value\":\"\",\"msg\":\"Email is Invalid!!!\",\"param\":\"email\",\"location\":\"body\"}]}","level":"error","timestamp":"2021-03-09T11:29:15.734Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T12:00:59.093Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T12:04:12.481Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T12:06:12.078Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T16:14:01.001Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T16:14:01.084Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T16:14:34.348Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T16:15:21.526Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T16:46:53.387Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T16:47:38.629Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T16:50:30.918Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T17:16:30.361Z"}
+{"message":"No token provided...","level":"error","timestamp":"2021-03-09T17:17:03.323Z"}
+{"message":"No token provided...","level":"error","timestamp":"2021-03-09T17:19:01.110Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:23:17.080Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T17:23:57.332Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:29:37.283Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T17:31:43.875Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:41:47.853Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:43:50.719Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T17:44:14.527Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:45:21.041Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:47:36.767Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:49:02.802Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:49:58.410Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T17:50:23.506Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T17:54:08.664Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T17:54:26.375Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:27:33.927Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T18:28:15.592Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:29:24.453Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:31:18.592Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:31:18.612Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:31:52.627Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:31:52.631Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T18:32:00.121Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:32:46.486Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:36:08.121Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:39:59.802Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:41:26.550Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:42:19.337Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:42:19.357Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:42:30.084Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:42:30.089Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:42:36.360Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:42:36.364Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:42:42.241Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T18:43:05.291Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:43:42.842Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:44:01.871Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:46:30.002Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:47:55.615Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:47:55.636Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:48:07.790Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:48:07.797Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:48:15.519Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:48:15.525Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:48:40.980Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T18:50:36.617Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T19:21:47.768Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T19:22:16.792Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T19:22:22.953Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T19:22:39.501Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T19:22:49.682Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T19:24:15.735Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T19:24:31.263Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T19:24:39.884Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T19:24:55.834Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T19:25:26.902Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T19:25:49.045Z"}
+{"message":"login token has verified","level":"info","timestamp":"2021-03-09T19:26:06.828Z"}
+{"message":"Data Get Successfullly","level":"info","timestamp":"2021-03-09T19:26:10.950Z"}

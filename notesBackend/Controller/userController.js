@@ -89,7 +89,7 @@ module.exports = class Controller {
                 response.flag = false;
                 response.data = err.message;
                 res.status(err.status).send(response);
-            });
+            });gi
         } catch (error) {
             console.error(error);
         }

@@ -37,5 +37,18 @@ module.exports = {
             .notEmpty().withMessage("Password is Required!")
             .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
             .isString()
+    ],
+    forgetPassword: [
+        body("email")
+            .trim()
+            .notEmpty().withMessage("Email is Required!")
+            .isEmail().withMessage("Email is Invalid!!!"),
+    ],
+    resetPassword: [
+        body("password")
+            .trim()
+            .notEmpty().withMessage("Password is Required!")
+            .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
+            .isString()
     ]
 }

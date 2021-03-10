@@ -29,14 +29,13 @@ let userNoteModel = mongoose.model('userNote', noteSchema);
 class NoteModel {
 
     createNote(data) {
-        console.log("modedl data", data)
         let noteData = new userNoteModel(data)
         return noteData.save(data)
-        .then((result) => {
-            return result;
-        }).catch((error) => {
-            return ({ message: "Something Went Wrong Please Check", error: error });
-        });
+            .then((result) => {
+                return result;
+            }).catch((error) => {
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            });
     }
 
     getDataAll() {
@@ -45,6 +44,39 @@ class NoteModel {
                 return result;
             })
             .catch((error) => {
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            })
+    }
+
+    updateNote(id, newData) {
+        console.log("modedl data update ????????????????????????????", id, newData)
+        return userNoteModel.findByIdAndUpdate(id, newData)
+            .then(result => {
+                console.log("tttttttttttttttttttttttttttttttt");
+                return result;
+            })
+            .catch(error => {
+                console.log("cccccccccccccccccccccccccccccc");
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            })
+    }
+
+    deleteNote(id) {
+        return userNoteModel.findByIdAndRemove(id)
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            })
+    }
+
+    getUserAllNotes(id) {
+        return userNoteModel.find({ "userID": id })
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
                 return ({ message: "Something Went Wrong Please Check", error: error });
             })
     }
