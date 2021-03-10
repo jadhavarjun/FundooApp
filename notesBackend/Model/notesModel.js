@@ -16,9 +16,16 @@ const noteSchema = new mongoose.Schema({
     },
     colorNote: {
         type: String,
-        default: null
+        default: "#ffffff"
     },
-
+    isArchive: {
+        type: Boolean,
+        default: false
+    },
+    isTrash: {
+        type:Boolean,
+        default: false
+    }
 },
     {
         timestamps: true
@@ -34,7 +41,7 @@ class NoteModel {
             .then((result) => {
                 return result;
             }).catch((error) => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return error;
             });
     }
 
@@ -44,7 +51,7 @@ class NoteModel {
                 return result;
             })
             .catch((error) => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return error;
             })
     }
 
@@ -52,12 +59,10 @@ class NoteModel {
         console.log("modedl data update ????????????????????????????", id, newData)
         return userNoteModel.findByIdAndUpdate(id, newData)
             .then(result => {
-                console.log("tttttttttttttttttttttttttttttttt");
                 return result;
             })
             .catch(error => {
-                console.log("cccccccccccccccccccccccccccccc");
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return error;
             })
     }
 
@@ -67,17 +72,17 @@ class NoteModel {
                 return result;
             })
             .catch(error => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return error;
             })
     }
 
     getUserAllNotes(id) {
-        return userNoteModel.find({ "userID": id })
+        return userNoteModel.find(id)
             .then(result => {
                 return result;
             })
             .catch(error => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return error;
             })
     }
 }

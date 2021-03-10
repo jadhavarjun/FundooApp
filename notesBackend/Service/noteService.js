@@ -49,7 +49,8 @@ class NoteService {
             })
     }
     getUserAllNotes(id) {
-        return noteModel.getUserAllNotes(id)
+        let userID = {userID: id}
+        return noteModel.getUserAllNotes(userID)
             .then((result) => {
                 return ({ message: "User All Notes Successfully", data: result, status: statusCode.OK });
             })
