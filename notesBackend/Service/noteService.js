@@ -29,7 +29,6 @@ class NoteService {
     }
 
     updateNote(id, newData) {
-        console.log("service update ''''''''''''''''''");
         return noteModel.updateNote(id, newData)
             .then((result) => {
                 return ({ message: "Notes Update Successfully", data: result, status: statusCode.OK });
@@ -38,7 +37,27 @@ class NoteService {
                 return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
             })
     }
+    archiveNote(id){
+        let flag = { isArchive: true}
+        return noteModel.updateNote(id, flag)
+        .then((result) => {
+            return ({ message: "Notes Archived Successfully", data: result, status: statusCode.OK });
+        })
+        .catch((error) => {
+            return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
+        })
+    }
 
+    trashNote(id){
+        let flag = { isTrash: true}
+        return noteModel.updateNote(id, flag)
+        .then((result) => {
+            return ({ message: "Notes Trash Successfully", data: result, status: statusCode.OK });
+        })
+        .catch((error) => {
+            return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
+        })
+    }
     deleteNote(id) {
         return noteModel.deleteNote(id)
             .then((result) => {

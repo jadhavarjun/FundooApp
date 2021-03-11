@@ -22,5 +22,7 @@ module.exports = (app) => {
     app.get("/note/getallnote", noteController.noteGetData)
     app.put("/note/update/:id",jwtToken.tokenVerify,noteController.updateNote)
     app.delete("/note/delete/:id", jwtToken.tokenVerify, noteController.deleteNote)
-    app.post("/note/get-user-notes", jwtToken.tokenVerify, noteController.getUserAllNotes)
+    app.post("/note/get_user_notes", jwtToken.tokenVerify, noteController.getUserAllNotes)
+    app.post("/note/archive_note/:id", jwtToken.tokenVerify, noteController.archiveNote)
+    app.post("/note/trash_note/:id", jwtToken.tokenVerify, noteController.trashNote)
 } 

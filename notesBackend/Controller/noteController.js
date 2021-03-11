@@ -65,6 +65,48 @@ class NoteController {
         }
     }
 
+    archiveNote(req, res) {
+        try {
+            let id = req.params.id;
+            console.log("update id and data", id);
+            noteService.archiveNote(id)
+                .then((result) => {
+                    response.flag = true;
+                    response.data = result.data;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.success = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
+
+        } catch (error) {
+            console.error("Record is Not found Please Enter Correct One");
+        }
+    }
+
+
+    trashNote(req, res){
+        try {
+            let id = req.params.id;
+            console.log("update id and data", id);
+            noteService.trashNote(id)
+                .then((result) => {
+                    response.flag = true;
+                    response.data = result.data;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.success = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
+
+        } catch (error) {
+            console.error("Record is Not found Please Enter Correct One");
+        }
+    }
     deleteNote(req, res) {
         try {
             let id = req.params.id;
@@ -85,7 +127,7 @@ class NoteController {
         }
     }
 
-    getUserAllNotes(req, res){
+    getUserAllNotes(req, res) {
         try {
             let id = req.decoded.id;
             noteService.getUserAllNotes(id)

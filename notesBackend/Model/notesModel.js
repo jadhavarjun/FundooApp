@@ -23,7 +23,7 @@ const noteSchema = new mongoose.Schema({
         default: false
     },
     isTrash: {
-        type:Boolean,
+        type: Boolean,
         default: false
     }
 },
@@ -56,7 +56,6 @@ class NoteModel {
     }
 
     updateNote(id, newData) {
-        console.log("modedl data update ????????????????????????????", id, newData)
         return userNoteModel.findByIdAndUpdate(id, newData)
             .then(result => {
                 return result;
@@ -78,6 +77,7 @@ class NoteModel {
 
     getUserAllNotes(id) {
         return userNoteModel.find(id)
+
             .then(result => {
                 return result;
             })

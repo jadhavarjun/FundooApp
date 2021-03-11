@@ -50,5 +50,8 @@ module.exports = {
             .notEmpty().withMessage("Password is Required!")
             .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
             .isString()
+    ],
+    title:[
+
     ]
 }
