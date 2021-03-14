@@ -1,5 +1,6 @@
 const statusCode = require('../Middleware/httpStatusCode.json')
 const noteService = require('../Service/noteService')
+const redisCache = require('../Middleware/redisCache')
 
 
 const response = {};
@@ -25,29 +26,29 @@ class NoteController {
 
     }
 
-    noteGetData(req, res) {
-        try {
-            noteService.getAllNotes()
-                .then((result) => {
-                    response.data = result.data;
-                    response.flag = true;
-                    response.message = result.message;
-                    res.status(result.status).send(response);
-                }).catch((err) => {
-                    response.flag = false;
-                    response.data = err.message;
-                    res.status(err.status).send(response);
-                });
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // noteGetData(req, res) {
+    //     try {
+
+    //         noteService.getAllNotes()
+    //             .then((result) => {
+    //                 response.data = result.data;
+    //                 response.flag = true;
+    //                 response.message = result.message;
+    //                 res.status(result.status).send(response);
+    //             }).catch((err) => {
+    //                 response.flag = false;
+    //                 response.data = err.message;
+    //                 res.status(err.status).send(response);
+    //             });
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
     updateNote(req, res) {
 
         try {
             let newData = req.body;
             let id = req.params.id;
-            console.log("update id and data", id, newData);
             noteService.updateNote(id, newData)
                 .then((result) => {
                     response.flag = true;
@@ -68,7 +69,6 @@ class NoteController {
     archiveNote(req, res) {
         try {
             let id = req.params.id;
-            console.log("update id and data", id);
             noteService.archiveNote(id)
                 .then((result) => {
                     response.flag = true;
@@ -90,7 +90,7 @@ class NoteController {
     trashNote(req, res){
         try {
             let id = req.params.id;
-            console.log("update id and data", id);
+            console.log("tttttttttttttttttttttttttt", id);
             noteService.trashNote(id)
                 .then((result) => {
                     response.flag = true;
@@ -132,6 +132,8 @@ class NoteController {
             let id = req.decoded.id;
             noteService.getUserAllNotes(id)
                 .then((result) => {
+                    console.log("Loading Data from database");
+                    redisCache.loadCache(id, result.data)
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
@@ -142,7 +144,7 @@ class NoteController {
                     res.status(result.status).send(response);
                 });
         } catch (error) {
-            console.error("Employee Record is Not found Please Enter Correct One");
+            console.error("Notes Record is Not found Please Enter Correct One");
         }
     }
 }

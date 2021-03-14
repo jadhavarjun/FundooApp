@@ -12,6 +12,7 @@ const noteSchema = new mongoose.Schema({
     },
     userID: {
         type: Schema.Types.ObjectId,//referencing other documents from other collections
+        ref: 'notes', //userSchema
         require: true
     },
     colorNote: {
@@ -45,16 +46,6 @@ class NoteModel {
             });
     }
 
-    getDataAll() {
-        return userNoteModel.find({})
-            .then((result) => {
-                return result;
-            })
-            .catch((error) => {
-                return error;
-            })
-    }
-
     updateNote(id, newData) {
         return userNoteModel.findByIdAndUpdate(id, newData)
             .then(result => {
@@ -77,12 +68,24 @@ class NoteModel {
 
     getUserAllNotes(id) {
         return userNoteModel.find(id)
-
+            .populate('userID')
             .then(result => {
                 return result;
             })
             .catch(error => {
                 return error;
+            })
+    }
+
+    findOne(id) {
+        return userNoteModel.findOne({ _id: id })
+            .then((result) => {
+                console.log(result);
+                return result;
+            })
+            .catch((error) => {
+                console.log(error);
+                return ({ message: "Something Went Wrong Please Check", error: error });
             })
     }
 }

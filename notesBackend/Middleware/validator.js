@@ -24,8 +24,6 @@ module.exports = {
             .notEmpty().withMessage("Password is Required!")
             .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
             .isString()
-
-
     ],
     login: [
         body("email")
@@ -51,7 +49,12 @@ module.exports = {
             .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
             .isString()
     ],
-    title:[
-
-    ]
+    createNote:[
+        body("title")
+        .trim()
+        .notEmpty().withMessage("Title is Required!"),
+        body("description")
+        .trim()
+        .notEmpty().withMessage("description is Required!")
+    ],
 }
