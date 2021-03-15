@@ -11,6 +11,7 @@ class NoteController {
             let id = req.decoded.id;
             noteService.noteInsert(req.body, id)
                 .then((result) => {
+                    redisCache.deleteCache(id)
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
@@ -47,10 +48,12 @@ class NoteController {
     updateNote(req, res) {
 
         try {
+            let userid = req.decoded.id;
             let newData = req.body;
             let id = req.params.id;
             noteService.updateNote(id, newData)
                 .then((result) => {
+                    redisCache.deleteCache(userid)
                     response.flag = true;
                     response.data = result.data;
                     response.message = result.message;
@@ -68,9 +71,11 @@ class NoteController {
 
     archiveNote(req, res) {
         try {
+            let userid = req.decoded.id;
             let id = req.params.id;
             noteService.archiveNote(id)
                 .then((result) => {
+                    redisCache.deleteCache(userid)
                     response.flag = true;
                     response.data = result.data;
                     response.message = result.message;
@@ -89,10 +94,12 @@ class NoteController {
 
     trashNote(req, res){
         try {
+            let userid = req.decoded.id;
             let id = req.params.id;
             console.log("tttttttttttttttttttttttttt", id);
             noteService.trashNote(id)
                 .then((result) => {
+                    redisCache.deleteCache(userid)
                     response.flag = true;
                     response.data = result.data;
                     response.message = result.message;
@@ -109,10 +116,12 @@ class NoteController {
     }
     deleteNote(req, res) {
         try {
+            let userid = req.decoded.id;
             let id = req.params.id;
             console.log("empid", id);
             noteService.deleteNote(id)
                 .then((result) => {
+                    redisCache.deleteCache(userid)
                     response.flag = true;
                     response.data = result.data;
                     response.message = result.message;

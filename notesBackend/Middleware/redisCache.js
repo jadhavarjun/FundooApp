@@ -25,6 +25,17 @@ class RedisCache {
         redis_client.set(`notes ${userId}`, JSON.stringify(data));
     }
 
+    deleteCache = (userId) => {
+        redis_client.del(`notes ${userId}`, JSON.stringify({
+            from: "cache memory",
+        }), (err, data) => {
+            if (err) {
+                console.log("eroor");
+            } else {
+                console.log("deleted", data);
+            }
+        })
+    }
     
 }
 module.exports = new RedisCache()
