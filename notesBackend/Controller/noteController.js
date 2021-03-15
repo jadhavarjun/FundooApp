@@ -147,5 +147,39 @@ class NoteController {
             console.error("Notes Record is Not found Please Enter Correct One");
         }
     }
+
+    //attachLabel
+    attachLabel(req, res){
+        let noteID = req.params.id;
+        let labelID = req.body.labelID;
+        noteService.attachLabel(noteID, labelID)
+        .then((result) => {
+            response.data = result.data;
+            response.flag = true;
+            response.message = result.message;
+            res.status(result.status).send(response);
+        }).catch((err) => {
+            response.flag = false;
+            response.data = err.message;
+            res.status(result.status).send(response);
+        });
+    }
+
+    //dettachFromLabel
+    dettachFromLabel(req, res){
+        let noteID = req.params.id;
+        let labelID = req.body.labelID;
+        noteService.dettachFromLabel(noteID, labelID)
+        .then((result) => {
+            response.data = result.data;
+            response.flag = true;
+            response.message = result.message;
+            res.status(result.status).send(response);
+        }).catch((err) => {
+            response.flag = false;
+            response.data = err.message;
+            res.status(result.status).send(response);
+        });
+    }
 }
 module.exports = new NoteController();

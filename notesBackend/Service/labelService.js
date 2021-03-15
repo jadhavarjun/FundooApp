@@ -1,6 +1,7 @@
 const labelModel = require('../Model/labelModel')
 const statusCode = require('../Middleware/httpStatusCode.json')
 const logger = require('../Middleware/winstenLogger')
+const noteModel = require('../Model/notesModel')
 
 
 class LableService {

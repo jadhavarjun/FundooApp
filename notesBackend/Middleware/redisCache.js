@@ -25,5 +25,6 @@ class RedisCache {
         redis_client.set(`notes ${userId}`, JSON.stringify(data));
     }
 
+    
 }
 module.exports = new RedisCache()

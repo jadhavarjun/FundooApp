@@ -86,5 +86,26 @@ class NoteService {
                 return ({ message: "Note Record is Not found", error: error, status: statusCode.NotFound });
             })
     }
+
+    //attachLabel
+    attachLabel(noteID, labelID) {
+        // let label = { labelID:labelID }
+        return noteModel.attachLabel(noteID, labelID)
+            .then((result) => {
+                return ({ message: "Label Attached Successfully", data: result, status: statusCode.OK });
+            }).catch((err) => {
+                return ({ message: "label Not Attached!!", error: err, status: statusCode.NotFound });
+            });
+    }
+    //dettachFromLabel
+    dettachFromLabel(noteID, labelID) {
+        return noteModel.dettachFromLabel(noteID, labelID)
+            .then((result) => {
+                return ({ message: "Remove Note From Label Successfully", data: result, status: statusCode.OK });
+            }).catch((err) => {
+                return ({ message: "label Not Attached!!", error: err, status: statusCode.NotFound });
+            });
+    }
+
 }
 module.exports = new NoteService()

@@ -15,6 +15,11 @@ const noteSchema = new mongoose.Schema({
         ref: 'notes', //userSchema
         require: true
     },
+    labelID: [{
+        type: Schema.Types.ObjectId,//referencing other documents from other collections
+        ref: 'label',
+        default: null
+    }],
     colorNote: {
         type: String,
         default: "#ffffff"
@@ -69,6 +74,7 @@ class NoteModel {
     getUserAllNotes(id) {
         return userNoteModel.find(id)
             .populate('userID')
+            .populate('labelID')
             .then(result => {
                 return result;
             })
@@ -87,6 +93,27 @@ class NoteModel {
                 console.log(error);
                 return ({ message: "Something Went Wrong Please Check", error: error });
             })
+    }
+
+    //attachedLabel
+    attachLabel(id, labelID) {
+        console.log()
+        return userNoteModel.findByIdAndUpdate(id, { $push: { labelID: labelID } })
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
+                return error;
+            })
+    }
+    dettachFromLabel(id, labelID){
+        return userNoteModel.findByIdAndUpdate(id, { $pull: { labelID: labelID } })
+        .then(result => {
+            return result;
+        })
+        .catch(error => {
+            return error;
+        })
     }
 }
 

@@ -81,7 +81,6 @@ class LabelController {
         } catch (error) {
             console.error("Label Record is Not found Please Enter Correct One");
         }
-
     }
 }
 

@@ -14,18 +14,21 @@ module.exports = (app) => {
     app.post("/user/login",validator.login,validate.validation, userController.login)
     app.post("/user/forgetpassword",validator.forgetPassword,validate.validation,userController.forgetPassword)
     app.post("/resetPassword/:token",jwtToken.forgetVerify,validator.forgetPassword,validate.validation,userController.resetPassword)
-
+    
     //notes routes
     app.post("/note/create",validator.createNote,validate.validation,jwtToken.tokenVerify,noteController.noteCreate)
-    app.put("/note/update/:id",validator.createNote,validate.validation,jwtToken.tokenVerify,noteController.updateNote)
-    app.delete("/note/delete/:id", jwtToken.tokenVerify, noteController.deleteNote)
-    app.post("/note/get_user_notes", jwtToken.tokenVerify, redisCache.checkCache ,noteController.getUserAllNotes)
-    app.post("/note/archive_note/:id", jwtToken.tokenVerify, noteController.archiveNote)
-    app.post("/note/trash_note/:id", jwtToken.tokenVerify, noteController.trashNote)
+    app.put("/note/:id/update",validator.createNote,validate.validation,jwtToken.tokenVerify,noteController.updateNote)
+    app.delete("/note/:id/delete", jwtToken.tokenVerify, noteController.deleteNote)
+    app.get("/note/get_user_notes", jwtToken.tokenVerify, redisCache.checkCache ,noteController.getUserAllNotes)
+    app.put("/note/:id/archive_note", jwtToken.tokenVerify, noteController.archiveNote)
+    app.put("/note/:id/trash_note", jwtToken.tokenVerify, noteController.trashNote)
+    app.put('/note/:id/add_label',jwtToken.tokenVerify,noteController.attachLabel)
+    app.put("/note/:id/remove_label",jwtToken.tokenVerify,noteController.dettachFromLabel)
 
     //label routes
     app.post("/label/create",jwtToken.tokenVerify,labelController.createLabel)
-    app.post("/label/get_user_lable", jwtToken.tokenVerify, labelController.getUserAllLabelNote)
-    app.put("/label/update/:id",jwtToken.tokenVerify,labelController.updateLabel)
-    app.delete("/label/delete/:id",jwtToken.tokenVerify,labelController.deleteLabel)
+    app.get("/label/get_user_lable", jwtToken.tokenVerify, labelController.getUserAllLabelNote)
+    app.put("/label/:id/update",jwtToken.tokenVerify,labelController.updateLabel)
+    app.delete("/label/:id/delete",jwtToken.tokenVerify,labelController.deleteLabel)
+    
 } 
