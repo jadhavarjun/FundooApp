@@ -1,0 +1,104 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Fundoo Note",
+        "description": "This Application Used to keep your notes",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/user",
+    "tags": [{
+        "name": "Users",
+        "description": "User Form for FUNDOO NOTE"
+    }],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/registration": {
+            "post": {
+                "summary": "Register a new user",
+                "tags": [
+                    "Users Registration"
+                ],
+                "description": "Create a new user in system",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "Register a new user",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Registration Success"
+                    },
+                    "500": {
+                        "description": "User Registration failed!!"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "summary": "Login user",
+                "tags": [
+                    "Users Login"
+                ],
+                "description": "Login user in Fundoo Note",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Login user",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login Success",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    },
+                    "500": {
+                        "description": "User login failed!!"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+
+}

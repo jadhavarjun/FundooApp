@@ -150,7 +150,7 @@ class NoteController {
                 }).catch((err) => {
                     response.flag = false;
                     response.data = err.message;
-                    res.status(result.status).send(response);
+                    res.status(err.status).send(response);
                 });
         } catch (error) {
             console.error("Notes Record is Not found Please Enter Correct One");
@@ -163,6 +163,7 @@ class NoteController {
         let labelID = req.body.labelID;
         noteService.attachLabel(noteID, labelID)
         .then((result) => {
+            redisCache.loadCache(noteID, result.data)
             response.data = result.data;
             response.flag = true;
             response.message = result.message;
@@ -170,7 +171,7 @@ class NoteController {
         }).catch((err) => {
             response.flag = false;
             response.data = err.message;
-            res.status(result.status).send(response);
+            res.status(err.status).send(response);
         });
     }
 
@@ -180,6 +181,7 @@ class NoteController {
         let labelID = req.body.labelID;
         noteService.dettachFromLabel(noteID, labelID)
         .then((result) => {
+            redisCache.loadCache(noteID, result.data)
             response.data = result.data;
             response.flag = true;
             response.message = result.message;
@@ -187,8 +189,44 @@ class NoteController {
         }).catch((err) => {
             response.flag = false;
             response.data = err.message;
-            res.status(result.status).send(response);
+            res.status(err.status).send(response);
         });
     }
+
+    //addCollabrator
+    addCollabrator(req, res){
+        let noteID = req.params.id;
+        let collabEmail = req.body.email;
+        noteService.addCollabrator(noteID, collabEmail)
+        .then((result) => {
+            redisCache.loadCache(noteID, result.data)
+            response.data = result.data;
+            response.flag = true;
+            response.message = result.message;
+            res.status(result.status).send(response);
+        }).catch((err) => {
+            response.flag = false;
+            response.data = err.message;
+            res.status(err.status).send(response);
+        });
+    }
+
+    removeCollabrator(req, res){
+        let noteID = req.params.id;
+        let collabEmail = req.body.email;
+        noteService.removeCollabrator(noteID, collabEmail)
+        .then((result) => {
+            redisCache.loadCache(noteID, result.data)
+            response.data = result.data;
+            response.flag = true;
+            response.message = result.message;
+            res.status(result.status).send(response);
+        }).catch((err) => {
+            response.flag = false;
+            response.data = err.message;
+            res.status(err.status).send(response);
+        });
+    }
+
 }
 module.exports = new NoteController();

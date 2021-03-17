@@ -1,8 +1,9 @@
 const noteModel = require('../Model/notesModel')
 const statusCode = require('../Middleware/httpStatusCode.json')
 const logger = require('../Middleware/winstenLogger')
+const userModel = require('../Model/userModel')
 
-
+const objUserModel = new userModel();
 class NoteService {
 
     noteInsert(data, id) {
@@ -90,7 +91,8 @@ class NoteService {
     //attachLabel
     attachLabel(noteID, labelID) {
         // let label = { labelID:labelID }
-        return noteModel.attachLabel(noteID, labelID)
+        let push = { $push: { labelID: labelID } }
+        return noteModel.labelAdd_Remove(noteID, push)
             .then((result) => {
                 return ({ message: "Label Attached Successfully", data: result, status: statusCode.OK });
             }).catch((err) => {
@@ -99,11 +101,51 @@ class NoteService {
     }
     //dettachFromLabel
     dettachFromLabel(noteID, labelID) {
-        return noteModel.dettachFromLabel(noteID, labelID)
+        let pull = { $pull: { labelID: labelID } }
+        return noteModel.labelAdd_Remove(noteID, pull)
             .then((result) => {
                 return ({ message: "Remove Note From Label Successfully", data: result, status: statusCode.OK });
             }).catch((err) => {
                 return ({ message: "label Not Attached!!", error: err, status: statusCode.NotFound });
+            });
+    }
+
+    //addCollabrator
+    addCollabrator(noteID, email) {
+        return objUserModel.findOne(email)
+            .then((result) => {
+                if (result) {
+                    let push = { $push: { collabratorID : result._id } }
+                    return noteModel.collabrationAdd_Remove(noteID, push)
+                        .then((result) => {
+                            return ({ message: "Collabration Successfully", data: result, status: statusCode.OK });
+                        }).catch((err) => {
+                            return ({ message: "Collabration is Unsuccessful!!", error: err, status: statusCode.NotFound });
+                        });
+                } else {
+                    return ({ message: "User Not Found!!", error: err, status: statusCode.NotFound });
+                }
+            }).catch((err) => {
+                return ({ message: "Please Enter Correct User Credential", error: err, status: statusCode.NotFound });
+            });
+    }
+
+    removeCollabrator(noteID, email) {
+        return objUserModel.findOne(email)
+            .then((result) => {
+                if (result) {
+                    let pull = { $pull: { collabratorID : result._id } }
+                    return noteModel.collabrationAdd_Remove(noteID, pull)
+                        .then((result) => {
+                            return ({ message: "Remove Collabration Successfully", data: result, status: statusCode.OK });
+                        }).catch((err) => {
+                            return ({ message: "Remove Collabration is Unsuccessful!!", error: err, status: statusCode.NotFound });
+                        });
+                } else {
+                    return ({ message: "User Not Found!!", error: err, status: statusCode.NotFound });
+                }
+            }).catch((err) => {
+                return ({ message: "Please Enter Correct User Credential", error: err, status: statusCode.NotFound });
             });
     }
 

@@ -11,13 +11,13 @@ const noteSchema = new mongoose.Schema({
         require: true
     },
     userID: {
-        type: Schema.Types.ObjectId,//referencing other documents from other collections
+        type: Schema.Types.ObjectId, //referencing other documents from other collections
         ref: 'notes', //userSchema
         require: true
     },
     labelID: [{
-        type: Schema.Types.ObjectId,//referencing other documents from other collections
-        ref: 'label',
+        type: Schema.Types.ObjectId, //referencing other documents from other collections
+        ref: 'label', //labelSchema
         default: null
     }],
     colorNote: {
@@ -31,7 +31,12 @@ const noteSchema = new mongoose.Schema({
     isTrash: {
         type: Boolean,
         default: false
-    }
+    },
+    collabratorID:[{
+        type: Schema.Types.ObjectId, //referencing other documents from other collections
+        ref: 'notes', //userSchema
+        default: null
+    }],
 },
     {
         timestamps: true
@@ -75,6 +80,7 @@ class NoteModel {
         return userNoteModel.find(id)
             .populate('userID')
             .populate('labelID')
+            .populate('collabratorID')
             .then(result => {
                 return result;
             })
@@ -96,9 +102,9 @@ class NoteModel {
     }
 
     //attachedLabel
-    attachLabel(id, labelID) {
+    labelAdd_Remove(id, labelID) {
         console.log()
-        return userNoteModel.findByIdAndUpdate(id, { $push: { labelID: labelID } })
+        return userNoteModel.findByIdAndUpdate(id, labelID)
             .then(result => {
                 return result;
             })
@@ -106,15 +112,27 @@ class NoteModel {
                 return error;
             })
     }
-    dettachFromLabel(id, labelID){
-        return userNoteModel.findByIdAndUpdate(id, { $pull: { labelID: labelID } })
-        .then(result => {
-            return result;
-        })
-        .catch(error => {
-            return error;
-        })
+    // dettachFromLabel(id, labelID){
+    //     return userNoteModel.findByIdAndUpdate(id, { $pull: { labelID: labelID } })
+    //     .then(result => {
+    //         return result;
+    //     })
+    //     .catch(error => {
+    //         return error;
+    //     })
+    // }
+
+    //addCollabrator
+    collabrationAdd_Remove(noteID, userID){
+        return userNoteModel.findByIdAndUpdate(noteID, userID)
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
+                return error;
+            })
     }
+
 }
 
 module.exports = new NoteModel()
