@@ -55,16 +55,14 @@
                     "Users Login"
                 ],
                 "description": "Login user in Fundoo Note",
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "body",
-                        "description": "Login user",
-                        "schema": {
-                            "$ref": "#/definitions/Login"
-                        }
+                "parameters": [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "Login user",
+                    "schema": {
+                        "$ref": "#/definitions/Login"
                     }
-                ],
+                }],
                 "produces": [
                     "application/json"
                 ],
@@ -77,6 +75,72 @@
                     },
                     "500": {
                         "description": "User login failed!!"
+                    }
+                }
+            }
+        },
+        "/forgetpassword": {
+            "post": {
+                "summary": "Forgetpassword",
+                "tags": [
+                    "Users forgetpassword"
+                ],
+                "description": "Getting Link for forgetpassword",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "forgetpassword",
+                        "schema": {
+                            "$ref": "#/definitions/forgetpassword"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ResetLink Send sucessfully",
+                        "schema": {
+                            "$ref": "#/definitions/forgetpassword"
+                        }
+                    },
+                    "500": {
+                        "description": "some Error occure!!"
+                    }
+                }
+            }
+        },
+        "/resetPassword/:token": {
+            "post": {
+                "summary": "ResetPassword",
+                "tags": [
+                    "Users ResetPassword"
+                ],
+                "description": "ResetPassword",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "forgetpassword",
+                        "schema": {
+                            "$ref": "#/definitions/ResetPassword"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ResetLink Send sucessfully",
+                        "schema": {
+                            "$ref": "#/definitions/forgetpassword"
+                        }
+                    },
+                    "500": {
+                        "description": "some Error occure!!"
                     }
                 }
             }
@@ -99,6 +163,29 @@
                 }
             }
         }
+    },
+    "Login": {
+        "properties": {
+            "email": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            }
+        }
+    },
+    "forgetpassword": {
+        "properties": {
+            "email": {
+                "type": "string"
+            }
+        }
+    },
+    "ResetPassword":{
+        "properties":{
+            "password":{
+                "type":"string"
+            }
+        }
     }
-
 }

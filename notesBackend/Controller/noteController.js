@@ -92,7 +92,7 @@ class NoteController {
     }
 
 
-    trashNote(req, res){
+    trashNote(req, res) {
         try {
             let userid = req.decoded.id;
             let id = req.params.id;
@@ -158,75 +158,90 @@ class NoteController {
     }
 
     //attachLabel
-    attachLabel(req, res){
+    attachLabel(req, res) {
         let noteID = req.params.id;
         let labelID = req.body.labelID;
         noteService.attachLabel(noteID, labelID)
-        .then((result) => {
-            redisCache.loadCache(noteID, result.data)
-            response.data = result.data;
-            response.flag = true;
-            response.message = result.message;
-            res.status(result.status).send(response);
-        }).catch((err) => {
-            response.flag = false;
-            response.data = err.message;
-            res.status(err.status).send(response);
-        });
+            .then((result) => {
+                redisCache.loadCache(noteID, result.data)
+                response.data = result.data;
+                response.flag = true;
+                response.message = result.message;
+                res.status(result.status).send(response);
+            }).catch((err) => {
+                response.flag = false;
+                response.data = err.message;
+                res.status(err.status).send(response);
+            });
     }
 
     //dettachFromLabel
-    dettachFromLabel(req, res){
+    dettachFromLabel(req, res) {
         let noteID = req.params.id;
         let labelID = req.body.labelID;
         noteService.dettachFromLabel(noteID, labelID)
-        .then((result) => {
-            redisCache.loadCache(noteID, result.data)
-            response.data = result.data;
-            response.flag = true;
-            response.message = result.message;
-            res.status(result.status).send(response);
-        }).catch((err) => {
-            response.flag = false;
-            response.data = err.message;
-            res.status(err.status).send(response);
-        });
+            .then((result) => {
+                redisCache.loadCache(noteID, result.data)
+                response.data = result.data;
+                response.flag = true;
+                response.message = result.message;
+                res.status(result.status).send(response);
+            }).catch((err) => {
+                response.flag = false;
+                response.data = err.message;
+                res.status(err.status).send(response);
+            });
     }
 
     //addCollabrator
-    addCollabrator(req, res){
+    addCollabrator(req, res) {
         let noteID = req.params.id;
         let collabEmail = req.body.email;
         noteService.addCollabrator(noteID, collabEmail)
-        .then((result) => {
-            redisCache.loadCache(noteID, result.data)
-            response.data = result.data;
-            response.flag = true;
-            response.message = result.message;
-            res.status(result.status).send(response);
-        }).catch((err) => {
-            response.flag = false;
-            response.data = err.message;
-            res.status(err.status).send(response);
-        });
+            .then((result) => {
+                redisCache.loadCache(noteID, result.data)
+                response.data = result.data;
+                response.flag = true;
+                response.message = result.message;
+                res.status(result.status).send(response);
+            }).catch((err) => {
+                response.flag = false;
+                response.data = err.message;
+                res.status(err.status).send(response);
+            });
     }
 
-    removeCollabrator(req, res){
+    removeCollabrator(req, res) {
         let noteID = req.params.id;
         let collabEmail = req.body.email;
         noteService.removeCollabrator(noteID, collabEmail)
-        .then((result) => {
-            redisCache.loadCache(noteID, result.data)
-            response.data = result.data;
-            response.flag = true;
-            response.message = result.message;
-            res.status(result.status).send(response);
-        }).catch((err) => {
-            response.flag = false;
-            response.data = err.message;
-            res.status(err.status).send(response);
-        });
+            .then((result) => {
+                redisCache.loadCache(noteID, result.data)
+                response.data = result.data;
+                response.flag = true;
+                response.message = result.message;
+                res.status(result.status).send(response);
+            }).catch((err) => {
+                response.flag = false;
+                response.data = err.message;
+                res.status(err.status).send(response);
+            });
     }
 
+    //search
+    search(req, res) {
+        let searchKey = req.body.searchKey;
+        noteService.search(searchKey)
+            .then((result) => {
+                response.data = result.data;
+                response.flag = true;
+                response.message = result.message;
+                res.status(result.status).send(response);
+            }).catch((err) => {
+                response.flag = false;
+                response.data = err.message;
+                res.status(err.status).send(response);
+            });
+    }
 }
 module.exports = new NoteController();

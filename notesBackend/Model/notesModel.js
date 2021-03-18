@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
+const userModel = require('../Model/userModel')
 
+
+const objUserModel = new userModel();
 const Schema = mongoose.Schema
 const noteSchema = new mongoose.Schema({
     title: {
@@ -32,7 +35,7 @@ const noteSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    collabratorID:[{
+    collabratorID: [{
         type: Schema.Types.ObjectId, //referencing other documents from other collections
         ref: 'notes', //userSchema
         default: null
@@ -123,7 +126,7 @@ class NoteModel {
     // }
 
     //addCollabrator
-    collabrationAdd_Remove(noteID, userID){
+    collabrationAdd_Remove(noteID, userID) {
         return userNoteModel.findByIdAndUpdate(noteID, userID)
             .then(result => {
                 return result;

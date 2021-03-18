@@ -115,7 +115,7 @@ class NoteService {
         return objUserModel.findOne(email)
             .then((result) => {
                 if (result) {
-                    let push = { $push: { collabratorID : result._id } }
+                    let push = { $push: { collabratorID: result._id } }
                     return noteModel.collabrationAdd_Remove(noteID, push)
                         .then((result) => {
                             return ({ message: "Collabration Successfully", data: result, status: statusCode.OK });
@@ -134,7 +134,7 @@ class NoteService {
         return objUserModel.findOne(email)
             .then((result) => {
                 if (result) {
-                    let pull = { $pull: { collabratorID : result._id } }
+                    let pull = { $pull: { collabratorID: result._id } }
                     return noteModel.collabrationAdd_Remove(noteID, pull)
                         .then((result) => {
                             return ({ message: "Remove Collabration Successfully", data: result, status: statusCode.OK });
@@ -149,5 +149,18 @@ class NoteService {
             });
     }
 
+    //search
+    search(searchKey) {
+        return objUserModel.search(searchKey)
+            .then((result) => {
+                if (result.length == 0) {
+                    return ({ message: "Search Matching Data Not Found!", error: err, status: statusCode.OK });
+                } else {
+                    return ({ message: "Successfully Search Matching Data For Collabrator", data: result, status: statusCode.OK });
+                }
+            }).catch((err) => {
+                return ({ message: "Search Matching Data Not Found!", error: err, status: statusCode.NotFound });
+            });
+    }
 }
 module.exports = new NoteService()

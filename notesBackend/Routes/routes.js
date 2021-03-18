@@ -13,7 +13,7 @@ module.exports = (app) => {
     app.post("/user/registration",validator.registration,validate.validation, userController.create);
     app.post("/user/login",validator.login,validate.validation, userController.login);
     app.post("/user/forgetpassword",validator.forgetPassword,validate.validation,userController.forgetPassword);
-    app.post("/resetPassword/:token",jwtToken.forgetVerify,validator.forgetPassword,validate.validation,userController.resetPassword);
+    app.post("/user/resetPassword/:token",jwtToken.forgetVerify,validator.forgetPassword,validate.validation,userController.resetPassword);
     
     //notes routes
     app.post("/note",validator.createNote,validate.validation,jwtToken.tokenVerify,noteController.noteCreate);
@@ -26,6 +26,7 @@ module.exports = (app) => {
     app.put("/note/:id/remove_label",jwtToken.tokenVerify, noteController.dettachFromLabel);
     app.put("/note/:id/add_collabrator", jwtToken.tokenVerify, noteController.addCollabrator)
     app.put("/note/:id/remove_collabration", jwtToken.tokenVerify, noteController.removeCollabrator)
+    app.get("/note/search",jwtToken.tokenVerify,noteController.search)
 
     //label routes
     app.post("/label/create",jwtToken.tokenVerify,labelController.createLabel);

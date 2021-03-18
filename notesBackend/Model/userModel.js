@@ -54,7 +54,23 @@ module.exports = class EmployeeModel {
                 return result;
             })
             .catch((error) => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return error;
+            })
+    }
+
+    search(searchKey) {
+        return notesModel.find({
+            $or: [
+                { "email": { $regex: searchKey } },
+                { "firstName": { $regex: searchKey } },
+                { "lastName": { $regex: searchKey } }
+            ]
+        })
+            .then((result) => {
+                return result;
+            })
+            .catch((error) => {
+                return error;
             })
     }
 
