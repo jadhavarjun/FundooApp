@@ -26,7 +26,7 @@ let notesModel = mongoose.model('notes', keepNotes);
 module.exports = class EmployeeModel {
 
     //Registration
-    create = (data) => {
+    create(data){
         return notesModel.create(data)
             .then((result) => {
 
@@ -79,10 +79,18 @@ module.exports = class EmployeeModel {
         .then((result) => {
             return result;
         }).catch((err) => {
-            return ({ message: "Something Went Wrong Please Check", error: error });
+            return err;
         });
            
     }
 
+    delete(id){
+        return notesModel.findByIdAndRemove(id)
+        .then((result) => {
+            return result;
+        }).catch((err) => {
+            return err;
+        });
+    }
 
 }

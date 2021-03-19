@@ -3,7 +3,7 @@ const REDIS_PORT = 6379;
 const redis_client = redis.createClient(REDIS_PORT)
 
 class RedisCache {
-    checkCache = (req, res, next) => {
+    checkCache(req, res, next){
         //console.log(`notes ${req.decoded.id}`)
         redis_client.get(`notes ${req.decoded.id}`, (err, data) => {
             if (err) {
@@ -21,11 +21,11 @@ class RedisCache {
     };
 
     //load data into cache memory
-    loadCache = (userId, data) => {
+    loadCache(userId, data){
         redis_client.set(`notes ${userId}`, JSON.stringify(data));
     }
 
-    deleteCache = (userId) => {
+    deleteCache(userId){
         redis_client.del(`notes ${userId}`, JSON.stringify({
             from: "cache memory",
         }), (err, data) => {

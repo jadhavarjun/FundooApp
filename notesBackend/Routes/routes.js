@@ -11,10 +11,10 @@ let userController = new Controller()
 module.exports = (app) => {
     app.get("/user/get", userController.getData);
     app.post("/user/registration",validator.registration,validate.validation, userController.create);
-    app.post("/user/login",validator.login,validate.validation, userController.login);
+    app.post("/login", userController.login);
     app.post("/user/forgetpassword",validator.forgetPassword,validate.validation,userController.forgetPassword);
-    app.post("/user/resetPassword/:token",jwtToken.forgetVerify,validator.forgetPassword,validate.validation,userController.resetPassword);
-    
+    app.post("/user/resetPassword/:token",jwtToken.forgetVerify,userController.resetPassword);
+    app.delete("/user/delete/:id", userController.delete);
     //notes routes
     app.post("/note",validator.createNote,validate.validation,jwtToken.tokenVerify,noteController.noteCreate);
     app.put("/note/:id",validator.createNote,validate.validation,jwtToken.tokenVerify,noteController.updateNote);

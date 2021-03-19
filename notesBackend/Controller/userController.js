@@ -43,57 +43,74 @@ module.exports = class Controller {
 
     login(req, res) {
         try {
+            console.log("check test <<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>");
             objService.login(req.body)
-            .then((result) => {
-                response.sucess = result.flag;
-                response.message = result.message;
-                response.data = result.data;
-                // response.jwtToken = result.jwtToken;
-                res.status(result.status).send(response);
-            }).catch((err) => {
-                response.flag = false;
-                response.data = err.message;
-                res.status(err.status).send(response);
-            });
+                .then((result) => {
+                    response.sucess = result.flag;
+                    response.message = result.message;
+                    response.data = result.data;
+                    // response.jwtToken = result.jwtToken;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.flag = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
         } catch (error) {
             console.error(error);
         }
     }
 
-    forgetPassword(req, res){
+    forgetPassword(req, res) {
         try {
             objService.forgetPassword(req.body)
-            .then((result) => {
-                response.flag = true;
-                response.message = result.message;
-                res.status(result.status).send(response);
-            }).catch((err) => {
-                response.flag = false;
-                response.data = err.message;
-                res.status(err.status).send(response);
-            });
+                .then((result) => {
+                    response.flag = true;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.flag = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
         } catch (error) {
             console.error(error);
         }
     }
-    resetPassword(req, res){
+    resetPassword(req, res) {
         try {
             let password = req.body.password;
             let email = req.decoded.email;
             objService.resetPassword(email, password)
-            .then((result) => {
-                response.flag = true;
-                response.message = result.message;
-                res.status(result.status).send(response);
-            }).catch((err) => {
-                response.flag = false;
-                response.data = err.message;
-                res.status(err.status).send(response);
-            });gi
+                .then((result) => {
+                    response.flag = true;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.flag = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
         } catch (error) {
             console.error(error);
         }
     }
-
-
+    delete(req, res) {
+        try {
+            let id = req.params.id;
+            objService.delete(id)
+                .then((result) => {
+                    response.flag = true;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.flag = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
+

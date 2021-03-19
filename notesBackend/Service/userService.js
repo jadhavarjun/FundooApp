@@ -35,10 +35,10 @@ module.exports = class EmployeeService {
         return objempModel.findAll()
             .then((result) => {
                 logger.info('Data Get Successfullly')
-                return ({ message: "Employee Record", data: result, status:statusCode.OK});
+                return ({ message: "Employee Record", data: result, status: statusCode.OK });
             })
             .catch((error) => {
-                return ({ message: "Thier is No Employee record", error: error, status:statusCode.NotFound });
+                return ({ message: "Thier is No Employee record", error: error, status: statusCode.NotFound });
             })
     }
     //login
@@ -84,34 +84,41 @@ module.exports = class EmployeeService {
     //forget Password
     forgetPassword(data) {
         let email = data.email;
-        
-            let tokenData = {
-               email: email
-            }
-            return objempModel.findOne(email)
-                .then((result) => {
-                    if (result) {
-                        let token = jwtToken.jwtToken(tokenData);
-                        mailler.mailer(email, token)
-                        return ({ flag: true, message: "Please Check Your Mail For Reset Password!!", status: statusCode.OK });
-                    } else {
-                        return ({ flag: false, message: "Email Not Exist Please Enter Valid Mail", status: statusCode.NotFound });
-                    }
-                })
+
+        let tokenData = {
+            email: email
+        }
+        return objempModel.findOne(email)
+            .then((result) => {
+                if (result) {
+                    let token = jwtToken.jwtToken(tokenData);
+                    mailler.mailer(email, token)
+                    return ({ flag: true, message: "Please Check Your Mail For Reset Password!!", status: statusCode.OK });
+                } else {
+                    return ({ flag: false, message: "Email Not Exist Please Enter Valid Mail", status: statusCode.NotFound });
+                }
+            })
     }
-    resetPassword(email, password)
-    {
+    resetPassword(email, password) {
         let hash = hashPassword.hashPassword(password);
         return objempModel.resetPassword(email, hash)
-        .then((result) => {
-            if (result) {
-                return ({ flag: true, message: "Password has been successfully Changed!!", status: statusCode.OK });
-            } else {
-                return ({ flag: false, message: "Something Went Wrong Please Do Forget Password Again!!", status: statusCode.BadRequest });
-            }
-        }).catch((err) => {
-            return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
-        });
-        
+            .then((result) => {
+                if (result) {
+                    return ({ flag: true, message: "Password has been successfully Changed!!", status: statusCode.OK });
+                } else {
+                    return ({ flag: false, message: "Something Went Wrong Please Do Forget Password Again!!", status: statusCode.BadRequest });
+                }
+            }).catch((err) => {
+                return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
+            });
+
+    }
+    delete(id) {
+        return objempModel.delete(id)
+            .then((result) => {
+                return ({ flag: true, message: "User Deleted Successfully!!", status: statusCode.OK });
+            }).catch((err) => {
+                return ({ flag: false, message: "Please Enter Valid User Details!!", status: statusCode.NotFound });
+            });
     }
 }
