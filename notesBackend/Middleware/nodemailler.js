@@ -20,7 +20,7 @@ module.exports.mailer = (email, token) => {
         // verify connection configuration
     transporter.sendMail(mailOption, (error, info) => {
         if (error) {
-            return console.log(error)
+            return error;
         }
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));

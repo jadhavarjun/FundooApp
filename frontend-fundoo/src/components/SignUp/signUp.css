@@ -11,11 +11,10 @@
     height: 100vh;
 }
 
-.border {
+.box_border {
   display: flex;
   flex-direction: column;
   padding: 0 40px 36px;
-  width: 680px;
   border-radius: 8px;
   border: 1px solid lightgray;
 }
@@ -34,7 +33,7 @@
 
 }
 
-.logo {
+.fundoo_logo {
   display: flex;
   flex-direction: row;
   font-size: 22px;
@@ -121,7 +120,7 @@ p{
 
 @media screen and (max-width: 600px) {
 
-  .border {
+  .box_border {
     border: none;
   }
 

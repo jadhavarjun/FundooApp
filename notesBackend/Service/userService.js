@@ -11,14 +11,18 @@ const objempModel = new empModel();
 
 module.exports = class EmployeeService {
     insert(data) {
+        console.log(data.email);
         let hash = hashPassword.hashPassword(data.password);
         data.password = hash;
         return objempModel.findOne(data.email)
             .then((result) => {
+                console.log("rrrrrrrrrrrrrrssssssssssss",result);
                 if (result) {
-                    return ({ success: false, message: "email already exit", data: result });
+                    console.log(":LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+                    return ({ success: false, message: "email already exit", status:statusCode.BadRequest});
                 }
                 else {
+                    console.log("EEEEEEEEEEEEEEEEEEEElllllllllll");
                     return objempModel.create(data)
                         .then((result) => {
                             logger.info('login token has verified')

@@ -3,7 +3,6 @@ const validate = require('../Middleware/validate');
 const validator = require('../Middleware/validator');
 const jwtToken = require("../Middleware/jwtToken");
 const redisCache = require ('../Middleware/redisCache');
-
 const noteController = require('../Controller/noteController');
 const labelController = require('../Controller/labelController');
 

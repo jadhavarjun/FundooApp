@@ -6,6 +6,7 @@ const objService = new sampleService();
 const response = {};
 module.exports = class Controller {
     create(req, res) {
+        console.log("cccccccccccccccccccccccccccccccccccc");
         try {
             objService.insert(req.body)
                 .then((result) => {

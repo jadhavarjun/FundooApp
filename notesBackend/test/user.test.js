@@ -24,8 +24,8 @@ describe('User Test', function () {
             .send({
                 "firstName": "Pravin",
                 "lastName": "Jadhav",
-                "email": "jadhavpravin@gmail.com",
-                "password": "pravin@143"
+                "email": "pravinjadhav@gmail.com",
+                "password": "Arjun@143"
             })
             userID = response.body.data._id;
         expect(response.body.sucess).toBe(true);
@@ -36,8 +36,17 @@ describe('User Test', function () {
         const response = await request(app)
             .delete(`/user/delete/${userID}`)
             .set('Accept', 'application/json')
-        authToken = response.body.data.token;
         expect(response.body.sucess).toBe(true);
         expect(response.body.message).toBe("User Deleted Successfully!!");
+    });
+    it('should return success response and message when forget password link send', async () => {
+        const response = await request(app)
+            .post('/user/forgetpassword')
+            .set('Accept', 'application/json')
+            .send({
+                "email":"jadhavarjun53@gmail.com"
+            })
+        expect(response.body.sucess).toBe(true);
+        expect(response.body.message).toBe("Please Check Your Mail For Reset Password!!");
     });
 });
