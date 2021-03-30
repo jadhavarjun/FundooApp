@@ -182,7 +182,7 @@ class SignUp extends Component {
                           />
                         </div>
                       </div>
-                      {/* <small>You can use letters, numbers & periods</small> */}
+                      <p>You can use letters, numbers & periods</p>
                       <div className="form_input">
                         <div className="input">
                           <TextField id="outlined" size="small"
@@ -209,6 +209,7 @@ class SignUp extends Component {
                           />
                         </div>
                       </div>
+                      <p>Use 8 more characters with a mix of letters, numbers & symbols</p>
                       <div className="checkBox" onClick={this.checkBox}>
                         <Checkbox
                           color="primary"

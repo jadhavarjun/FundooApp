@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Anton');
+
 .registrationContainer {
   /* margin-top: 30px;
   display: flex;
@@ -37,6 +39,7 @@
   display: flex;
   flex-direction: row;
   font-size: 22px;
+  padding-bottom: 24px;
   font-family: roboto, 'Noto Sans Myanmar UI', sans-serif, arial;
 }
 
@@ -47,9 +50,12 @@
   /* margin: 50px 0px 40px; */
   /* font-size: 2px; */
   font-weight: lighter;
-  font-family: 'Noto Sans Myanmar UI', sans-serif, arial;
+  font-family: 'Noto Sans', sans-serif;
 }
-
+p{
+  font-size: 14px;
+  padding-left: 12px;
+}
 .title_tag{
   margin-bottom: 30px;
 }
@@ -75,7 +81,7 @@
   flex-direction: row;
   margin: 2%;
   width: 100%;
-  height: 12vh;
+ padding-bottom: 20px;
 }
 
 .email_Input {
@@ -83,7 +89,7 @@
   margin: 2%;
   flex-direction: row;
   width: 100%;
-  height: 10vh;
+  padding-bottom: 5px;
 }
 
 .buttons {
@@ -140,4 +146,9 @@ p{
   .image{
     display: none;
   }
+
+  h1{
+    font-size: 10px;
+  }
+
 }
