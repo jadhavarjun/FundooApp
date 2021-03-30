@@ -81,16 +81,16 @@ class SignUp extends Component {
       flag = false;
     }
     else if (!passwordRegex.test(user.password)) {
-      this.setState({ passwordError: true, passwordErrorMsg: "Use 8 more characters with a mix of letters, numbers & symbols" })
+      this.setState({ passwordError: true, passwordErrorMsg: "Password Should be Proper Formate" })
       flag = false;
     }
 
     if (!user.conform_password) {
-      this.setState({ confirmPassError: true, confirmPassErrorMsg: "Confirm Password is Required" })
+      this.setState({ confirmPassError: true, confirmPassErrorMsg: "Password is Required" })
       flag = false;
     }
     else if (user.password != user.conform_password) {
-      this.setState({ confirmPassError: true, confirmPassErrorMsg: "Password and Comfirm Password Should be Same" })
+      this.setState({ confirmPassError: true, confirmPassErrorMsg: "Password and Comfirm Password be Same" })
       flag = false;
     }
     // calling apis

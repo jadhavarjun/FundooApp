@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Button, TextField} from '@material-ui/core';
-import './logIn.css'
+import './forgot_password.css'
 
-class LogIn extends Component {
-    render() {
-        return (
-            <div className="login">
+class ForgotPassword extends Component {
+    render(){
+        return(
+            <div className="login_container">
                 <div className="border">
-                    <div className="login_box">
-                        <div className="login_input">
-                            <div className="login_logo">
+                    <div className="box">
+                        <div className="box_input">
+                            <div className="logo">
                                 <font color="#1976d2"><b>F</b></font>
                                 <font color="#FF0000"><b>u</b></font>
                                 <font color="#FFD700"><b>n</b></font>
@@ -18,13 +18,12 @@ class LogIn extends Component {
                                 <font color="#006400"><b>o</b></font>
                             </div>
                             <div>
-                                <h1 className="h1">Sign In</h1>
-                                <h1 className="h1">Use Your Fundoo Account</h1>
+                                <h1 className="h1">Forgot Password</h1>
                             </div>
-                            <div className="login_form">
+                            <div className="form_field">
                                 <form className="form">
-                                    <div className="form_textfield">
-                                        <div className="textfield">
+                                    <div className="form_input">
+                                        <div className="input">
                                             <TextField id="outlined"
                                                 size="small"
                                                 label="Usermail"
@@ -33,34 +32,17 @@ class LogIn extends Component {
                                                 variant="outlined"
                                                 fullWidth />
                                         </div>
-
-                                        <div className="textfield">
-                                            <TextField id="outlined"
-                                                size="small"
-                                                label="Password"
-                                                name="password"
-                                                onChange={this.handleChange}
-                                                type="password"
-                                                variant="outlined"
-                                                fullWidth />
-                                        </div>
                                     </div>
 
-                                    <div className="forgot">
-                                        <Button color="primary">
-                                            Forgot Password
-                                        </Button>
-                                    </div>
                                     <div className="footer">
                                         <div className="signIn">
                                             <Button color="primary">
-                                                Create Account
+                                                    Login
                                             </Button>
                                         </div>
                                         <div className="button">
                                             <Button variant="contained" color="primary" onClick={this.submit}>Submit</Button>
                                         </div>
-
                                     </div>
                                 </form>
                             </div>
@@ -71,4 +53,4 @@ class LogIn extends Component {
         )
     }
 }
-export default LogIn;
+export default ForgotPassword;
