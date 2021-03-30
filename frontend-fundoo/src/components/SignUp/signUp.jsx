@@ -16,7 +16,6 @@ class SignUp extends Component {
     this.state = {
       alert: 0,
       showAlert: false,
-      msg: "",
       firstNameError: false,
       lastNameError: false,
       emailError: false,
