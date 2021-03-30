@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Button, TextField, Checkbox } from '@material-ui/core';
+import './LogIn.css'
 
 class LogIn extends Component {
     render() {
         return (
-            < div className="registrationContainer" >
-                <div className="box_border">
-                    <div className="box">
-                        <div className="boxInput">
-                            <div className="fundoo_logo">
+            <div className="login">
+                <div className="border">
+                    <div className="login_box">
+                        <div className="login_input">
+                            <div className="login_logo">
                                 <font color="#1976d2"><b>F</b></font>
                                 <font color="#FF0000"><b>u</b></font>
                                 <font color="#FFD700"><b>n</b></font>
@@ -16,37 +17,57 @@ class LogIn extends Component {
                                 <font color="#FF0000 "><b>o</b></font>
                                 <font color="#006400"><b>o</b></font>
                             </div>
-                            <h4 className="title_tag">Create Your Fundoo Account</h4>
-                            <div className="flex-image">
-                                <div className="form_parent">
-                                    <form className="form" onClick={this.handleSubmit}>
-                                        <div className="form_input">
-                                            <div className="email_Input">
-                                                <TextField id="outlined" size="small"
-                                                    name="email"
-                                                    onChange={e => this.handleChange("email", e.target.value)}
-                                                    label="Usermail"
-                                                    variant="outlined"
-                                                    fullWidth
-                                                />
-                                            </div>
+                            <div>
+                                <h1 className="h1">Sign In</h1>
+                                <h1 className="h1">Use Your Fundoo Account</h1>
+                            </div>
+                            <div className="login_form">
+                                <form className="form">
+                                    <div className="form_textfield">
+                                        <div className="textfield">
+                                            <TextField id="outlined"
+                                                size="small"
+                                                label="Usermail"
+                                                name="email"
+                                                onChange={this.handleChange}
+                                                variant="outlined"
+                                                fullWidth />
                                         </div>
-                                        <div className="buttons">
-                                            <div class="signin">
-                                                <Button color="primary" className="sign_btn">SignIn instead</Button>
-                                            </div>
-                                            <div className="signupbutton">
-                                                <Button variant="contained" color="primary">SignUp</Button>
-                                            </div>
+
+                                        <div className="textfield">
+                                            <TextField id="outlined"
+                                                size="small"
+                                                label="Password"
+                                                name="password"
+                                                onChange={this.handleChange}
+                                                type="password"
+                                                variant="outlined"
+                                                fullWidth />
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+
+                                    <div className="forgot">
+                                        <Button color="primary">
+                                            Forgot Password
+                                        </Button>
+                                    </div>
+                                    <div className="footer">
+                                        <div className="signIn">
+                                            <Button color="primary">
+                                                Create Account
+                                            </Button>
+                                        </div>
+                                        <div className="button">
+                                            <Button variant="contained" color="primary" onClick={this.submit}>Submit</Button>
+                                        </div>
+
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div >
-
+            </div>
         )
     }
 }
