@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './forgot_password.css';
 import { Button, TextField } from '@material-ui/core';
 import './forgot_password.css'
 import FundooLogo from '../fundoo_logo'
@@ -58,10 +59,10 @@ class ForgotPassword extends Component {
 
     render() {
         return (
-            <div className="login_container">
-                <div className="border">
-                    <div className="box">
-                        <div className="box_input">
+            <div className="reset">
+                <div className="reset_border">
+                    <div className="reset_box">
+                        <div className="reset_box_input">
                             {/* <div className="logo">
                                 <font color="#1976d2"><b>F</b></font>
                                 <font color="#FF0000"><b>u</b></font>

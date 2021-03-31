@@ -125,12 +125,6 @@ class ResetPassword extends Component {
                                                     fullWidth />
                                             </div>
                                         </div>
-
-                                        {/* <div className="forgot">
-                                            <Button color="primary">
-                                                Forgot Password
-                                        </Button>
-                                        </div> */}
                                         <div className="footer">
                                         <div className="signIn">
                                             <Button color="primary">

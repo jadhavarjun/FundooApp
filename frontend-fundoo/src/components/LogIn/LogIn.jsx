@@ -112,8 +112,9 @@ class LogIn extends Component {
                                             <div className="textfield">
                                                 <TextField id="outlined"
                                                     size="small"
-                                                    label="Usermail"
-                                                    value={this.state.user.email}
+                                                    label="Email"
+                                                    error={this.state.emailError}
+                                                    helperText={this.state.emailErrorMsg}
                                                     onChange={(e) => this.handleChange("email", e.target.value)}
                                                     variant="outlined"
                                                     fullWidth />
@@ -123,7 +124,8 @@ class LogIn extends Component {
                                                 <TextField id="outlined"
                                                     size="small"
                                                     label="Password"
-                                                    value={this.state.user.password}
+                                                    error={this.state.passwordError}
+                                                    helperText={this.state.passwordErrorMsg}
                                                     onChange={(e) => this.handleChange("password", e.target.value)}
                                                     type="password"
                                                     variant="outlined"
