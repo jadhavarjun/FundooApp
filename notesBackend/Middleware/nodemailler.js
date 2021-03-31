@@ -10,7 +10,7 @@ module.exports.mailer = (email, token) => {
         }
     });
 
-        const link = `<a href="http://localhost:3000/resetPassword/${token}">Click Here</a>`
+        const link = `<a href="http://localhost:3001/resetPassword/${token}">Click Here</a>`
         var mailOption = {
             from: process.env.MAIL,
             to: email,

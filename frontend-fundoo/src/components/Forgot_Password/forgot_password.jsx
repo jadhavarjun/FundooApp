@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
 import './forgot_password.css'
 import FundooLogo from '../fundoo_logo'
@@ -42,7 +43,7 @@ class ForgotPassword extends Component {
         if (data) {
             let email_data = {
                 email: data.email,
-              }
+            }
             userServices.forgotPassword(email_data)
                 .then((data) => {
                     // this.setState({ alert: 1, showAlert: true })
@@ -93,7 +94,7 @@ class ForgotPassword extends Component {
                                     <div className="footer">
                                         <div className="signIn">
                                             <Button color="primary">
-                                                Login
+                                                <Link to={{ pathname: `/login` }}>SignIn</Link>
                                             </Button>
                                         </div>
                                         <div className="button">

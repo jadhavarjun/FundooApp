@@ -2,6 +2,7 @@ import './signUp.css'
 import React, { Component } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '../App.css';
+import { Link } from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
 import { Button, TextField, Checkbox } from '@material-ui/core';
 import UserServices from '../../services/userService';
@@ -218,7 +219,9 @@ class SignUp extends Component {
                       {/* <p>Use 8 more characters with a mix of letters, numbers & symbols</p> */}
                       <div className="buttons">
                         <div class="signin">
-                          <Button color="primary" className="sign_btn">SignIn instead</Button>
+                          <Button color="primary" className="sign_btn">
+                            <Link to={{ pathname: `/login` }}>SignIn instead</Link>
+                          </Button>
                         </div>
                         <div className="signupbutton">
                           <Button variant="contained" color="primary">SignUp</Button>

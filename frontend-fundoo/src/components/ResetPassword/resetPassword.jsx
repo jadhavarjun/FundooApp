@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
 import { Button, TextField } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import './logIn.css';
 import FundooLogo from '../fundoo_logo';
 import UserServices from '../../services/userService';
 
 
 let userServices = new UserServices();
-class LogIn extends Component {
+class ResetPassword extends Component {
 
     constructor(props) {
         super(props);
@@ -16,10 +15,10 @@ class LogIn extends Component {
             user: [],
             alert: 0,
             showAlert: false,
-            emailError: false,
             passwordError: false,
-            emailErrorMsg: "",
             passwordErrorMsg: "",
+            confirmPassError: false,
+            confirmPassErrorMsg:""
 
         }
     }
@@ -27,8 +26,8 @@ class LogIn extends Component {
     handleChange = (key, value) => {
         const { user } = this.state;
         user[key] = value;
-        this.setState({ emailError: false, passwordError: false })
-        this.setState({ emailErrorMsg: "", passwordErrorMsg: "" })
+        this.setState({ confirmPassError: false, passwordError: false })
+        this.setState({ confirmPassErrorMsg: "", passwordErrorMsg: "" })
 
         this.setState({ user })
     }
@@ -38,17 +37,7 @@ class LogIn extends Component {
         const { user } = this.state;
 
         let flag = true;
-        const emailRegex = RegExp(/^[a-zA-Z0-9]+([._+-][0-9a-zA-Z]+)*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2,3})?$/);
         const passwordRegex = RegExp(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/);
-
-        if (!user.email) {
-            this.setState({ emailError: true, emailErrorMsg: "Email is Required" })
-            flag = false;
-        }
-        else if (!emailRegex.test(user.email)) {
-            this.setState({ emailError: true, emailErrorMsg: "Email Should be Proper Formate" })
-            flag = false;
-        }
 
         if (!user.password) {
             this.setState({ passwordError: true, passwordErrorMsg: "Password is Required" })
@@ -59,15 +48,26 @@ class LogIn extends Component {
             flag = false;
         }
 
+        if (!user.conform_password) {
+            this.setState({ confirmPassError: true, confirmPassErrorMsg: "Password is Required" })
+            flag = false;
+        }
+        else if (user.password != user.conform_password) {
+            this.setState({ confirmPassError: true, confirmPassErrorMsg: "Password and Comfirm Password be Same" })
+            flag = false;
+        }
+
+        let token = window.location.pathname.split("/")[2];
+        console.log(token);
         if (flag) {
             // console.log(user);
             let data = {
-                email: user.email,
                 password: user.password
             }
-            userServices.logIn(data)
+            userServices.resetPassword(data, token)
                 .then((data) => {
                     this.setState({ alert: 1, showAlert: true, user: [], })
+                    this.props.history.push('/login');
                     console.log(data);
                 })
                 .catch((error) => {
@@ -78,14 +78,15 @@ class LogIn extends Component {
 
     }
 
+
     render() {
         return (
             <div>
                 {this.state.showAlert &&
                     <div>
                         {
-                            this.state.alert == 1 ? <Alert severity="success">User Login Successfully!!</Alert>
-                                : <Alert severity="error">Login Fail!</Alert>
+                            this.state.alert == 1 ? <Alert severity="success">Reset Password Successfully!!</Alert>
+                                : <Alert severity="error">Reset Password Fail!</Alert>
                         }
                     </div>
                 }
@@ -93,18 +94,10 @@ class LogIn extends Component {
                     <div className="border">
                         <div className="login_box">
                             <div className="login_input">
-                                {/* <div className="login_logo">
-                                <font color="#1976d2"><b>F</b></font>
-                                <font color="#FF0000"><b>u</b></font>
-                                <font color="#FFD700"><b>n</b></font>
-                                <font color="#1976d2"><b>d</b></font>
-                                <font color="#FF0000 "><b>o</b></font>
-                                <font color="#006400"><b>o</b></font>
-                            </div> */}
                                 <FundooLogo />
                                 <div>
-                                    <h1 className="h1">Sign In</h1>
-                                    <h1 className="h1">Use Your Fundoo Account</h1>
+                                    {/* <h1 className="h1">Sign In</h1> */}
+                                    <h1 className="h1">Reset Your Account Password</h1>
                                 </div>
                                 <div className="login_form">
                                     <form className="form" onClick={this.handleSubmit}>
@@ -112,9 +105,10 @@ class LogIn extends Component {
                                             <div className="textfield">
                                                 <TextField id="outlined"
                                                     size="small"
-                                                    label="Usermail"
-                                                    value={this.state.user.email}
-                                                    onChange={(e) => this.handleChange("email", e.target.value)}
+                                                    label="new password"
+                                                    error={this.state.passwordError}
+                                                    helperText={this.state.passwordErrorMsg}
+                                                    onChange={(e) => this.handleChange("password", e.target.value)}
                                                     variant="outlined"
                                                     fullWidth />
                                             </div>
@@ -122,28 +116,29 @@ class LogIn extends Component {
                                             <div className="textfield">
                                                 <TextField id="outlined"
                                                     size="small"
-                                                    label="Password"
-                                                    value={this.state.user.password}
-                                                    onChange={(e) => this.handleChange("password", e.target.value)}
+                                                    label="confirm password"
+                                                    error={this.state.confirmPassError}
+                                                    helperText={this.state.confirmPassErrorMsg}
+                                                    onChange={(e) => this.handleChange("conform_password", e.target.value)}
                                                     type="password"
                                                     variant="outlined"
                                                     fullWidth />
                                             </div>
                                         </div>
 
-                                        <div className="forgot">
+                                        {/* <div className="forgot">
                                             <Button color="primary">
-                                                <Link to={{ pathname: `/forgot_password` }}>Forgot Password</Link>
+                                                Forgot Password
+                                        </Button>
+                                        </div> */}
+                                        <div className="footer">
+                                        <div className="signIn">
+                                            <Button color="primary">
+                                                <Link to={{ pathname: `/login` }}>SignIn instead</Link>
                                             </Button>
                                         </div>
-                                        <div className="footer">
-                                            <div className="signIn">
-                                                <Button color="primary">
-                                                <Link to={{ pathname: `/signup` }}>Create Account</Link>                                              
-                                            </Button>
-                                            </div>
                                             <div className="button">
-                                                <Button variant="contained" color="primary">SignIn</Button>
+                                                <Button variant="contained" color="primary" onClick={this.submit}>Submit</Button>
                                             </div>
 
                                         </div>
@@ -157,4 +152,4 @@ class LogIn extends Component {
         )
     }
 }
-export default LogIn;
+export default ResetPassword;

@@ -15,7 +15,10 @@ export default class UserServices{
         return axiosService.postMethod(`${baseUrl}/user/forgetpassword`,data)
     }
     logIn = (data) =>{
-        console.log("sssssssssssssssssssss");
         return axiosService.postMethod(`${baseUrl}/login`,data)
+    }
+    resetPassword = (data, token) =>{
+        console.log("sssssssssssssssssssss");
+        return axiosService.postMethod(`${baseUrl}/user/resetPassword/${token}`,data)
     }
 }
