@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './logIn.css';
 import FundooLogo from '../fundoo_logo';
 import UserServices from '../../services/userService';
-
+import Snackbar from '@material-ui/core/Snackbar';
 
 let userServices = new UserServices();
 class LogIn extends Component {
@@ -17,9 +17,11 @@ class LogIn extends Component {
             alert: 0,
             showAlert: false,
             emailError: false,
-            passwordError: false,
             emailErrorMsg: "",
+            passwordError: false,
             passwordErrorMsg: "",
+            snackbarOpen: false,
+            snackbarMsg: ""
 
         }
     }
@@ -27,7 +29,7 @@ class LogIn extends Component {
     handleChange = (key, value) => {
         const { user } = this.state;
         user[key] = value;
-        this.setState({ emailError: false, passwordError: false })
+        this.setState({ emailError: false, passwordError: false, snackbarOpen: false })
         this.setState({ emailErrorMsg: "", passwordErrorMsg: "" })
 
         this.setState({ user })
@@ -67,11 +69,13 @@ class LogIn extends Component {
             }
             userServices.logIn(data)
                 .then((data) => {
-                    this.setState({ alert: 1, showAlert: true, user: [], })
+                    // this.setState({ alert: 1, showAlert: true, user: [], })
+                    this.setState({snackbarOpen:true, snackbarMsg:"User Login SuccessFully!!!!"})
                     console.log(data);
                 })
                 .catch((error) => {
-                    this.setState({ alert: 2, showAlert: true })
+                    // this.setState({ alert: 2, showAlert: true })
+                    this.setState({snackbarOpen:true, snackbarMsg:"User Not Login!!"})
                     console.log(error);
                 })
         }
@@ -80,10 +84,19 @@ class LogIn extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.showAlert &&
+            <div className="container">
+                <Snackbar
+                anchorOrigin={{vertical:'center',horizontal:'center'}}
+                open={this.state.snackbarOpen}
+                autoHideDuration={3000}
+                onClose={this.handleChange}
+
+                message={<span id="message-id">{this.state.snackbarMsg}</span>}
+                />
+                 {this.state.showAlert &&
                     <div>
                         {
+                            
                             this.state.alert == 1 ? <Alert severity="success">User Login Successfully!!</Alert>
                                 : <Alert severity="error">Login Fail!</Alert>
                         }

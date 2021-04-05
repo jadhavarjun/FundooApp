@@ -51,6 +51,7 @@ module.exports = class EmployeeService {
         let password = data.password;
         return objempModel.findOne(email)
             .then((result) => {
+                console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBB", result);
                 if (result) {
                     return hashPassword.comparePassword(password, result.password)
                         .then((res) => {
@@ -67,8 +68,6 @@ module.exports = class EmployeeService {
                                 dataObj.email = result.email;
                                 dataObj.password = result.password;
                                 dataObj.token = token;
-                                // dataObj = result;
-                                // dataObj.token = token;
 
                                 return ({ flag: true, message: "User Login Successfully!!", data: dataObj, status: statusCode.OK });
                             }

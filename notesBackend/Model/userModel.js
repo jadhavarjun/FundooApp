@@ -49,8 +49,10 @@ module.exports = class EmployeeModel {
 
     //login find user with mailId
     findOne(mail) {
+        console.log("DDDDDDDDDDDDDDDDDDDDDDDD", mail);
         return notesModel.findOne({ email: mail })
             .then((result) => {
+                console.log("EEEEEEEEEEEEEEEEEEEEEE", result);
                 return result;
             })
             .catch((error) => {
@@ -77,6 +79,7 @@ module.exports = class EmployeeModel {
     resetPassword(email, password) {
         return notesModel.updateOne({email: email},{$set:{password: password}})
         .then((result) => {
+            console.log("dddddddddddddddddddddd",result);
             return result;
         }).catch((err) => {
             return err;

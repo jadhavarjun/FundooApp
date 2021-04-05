@@ -47,6 +47,7 @@ module.exports = class Controller {
             console.log("check test <<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>");
             objService.login(req.body)
                 .then((result) => {
+                    console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
                     response.sucess = result.flag;
                     response.message = result.message;
                     response.data = result.data;
