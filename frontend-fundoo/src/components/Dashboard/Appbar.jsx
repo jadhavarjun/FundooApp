@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import icon from '../../Assets/keep.png'
+import CreateNotes from '../Dashboard/note/CreateNotes'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -259,15 +260,8 @@ export default function MiniDrawer() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Typography paragraph>
-                    DashBaord.
-                    </Typography>
-                <Typography paragraph>
-                    DashBordjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-                </Typography>
+            <CreateNotes/>
             </main>
-            <div className="background_img">
-            </div>
         </div>
     );
 }

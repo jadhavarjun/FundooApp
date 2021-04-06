@@ -1,0 +1,23 @@
+.container{
+    /* width: 600px; */
+  
+}
+.addnotetitle{
+    height: 50px;
+}
+
+.addnotetitleinput{
+    margin-top: 10px;
+    margin-left: 10px;
+    /* font-family: 'Circular-Loom'; */
+}
+.addtitleinput, .addnoteinput{
+    height: 50px;
+    margin-left: 10px;
+}
+
+.bottom_bar{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+}

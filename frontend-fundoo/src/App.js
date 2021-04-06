@@ -6,7 +6,7 @@ import ForgotPassword from './components/Forgot_Password/forgot_password'
 import { Container } from '@material-ui/core';
 import ResetPassword from './components/ResetPassword/resetPassword'
 import Appbar from './components/Dashboard/Appbar'
-import CreateNotes from './components/Dashboard/CreateNotes'
+import CreateNotes from './components/Dashboard/note/CreateNotes'
 
 function App() {
   return (
