@@ -4,9 +4,9 @@ import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './logIn.css';
 import FundooLogo from '../fundoo_logo';
-import UserServices from '../../services/userService';
 import Snackbar from '@material-ui/core/Snackbar';
 
+import UserServices from '../../services/userService';
 let userServices = new UserServices();
 class LogIn extends Component {
 
@@ -68,14 +68,19 @@ class LogIn extends Component {
                 password: user.password
             }
             userServices.logIn(data)
-                .then((data) => {
+                .then((result) => {
                     // this.setState({ alert: 1, showAlert: true, user: [], })
-                    this.setState({snackbarOpen:true, snackbarMsg:"User Login SuccessFully!!!!"})
-                    console.log(data);
+                    // this.setState({snackbarOpen:true, snackbarMsg:"User Login SuccessFully!!!!"})
+                    localStorage.setItem('token', result.data.data.token);
+                    localStorage.setItem('userid', result.data.data._id);
+                    localStorage.setItem('email', result.data.data.email);
+
+                    console.log(result);
+                    this.props.history.push('/appbar');
                 })
                 .catch((error) => {
                     // this.setState({ alert: 2, showAlert: true })
-                    this.setState({snackbarOpen:true, snackbarMsg:"User Not Login!!"})
+                    this.setState({ snackbarOpen: true, snackbarMsg: "User Not Login!!" })
                     console.log(error);
                 })
         }
@@ -86,17 +91,17 @@ class LogIn extends Component {
         return (
             <div className="container">
                 <Snackbar
-                anchorOrigin={{vertical:'center',horizontal:'center'}}
-                open={this.state.snackbarOpen}
-                autoHideDuration={3000}
-                onClose={this.handleChange}
+                    anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+                    open={this.state.snackbarOpen}
+                    autoHideDuration={3000}
+                    onClose={this.handleChange}
 
-                message={<span id="message-id">{this.state.snackbarMsg}</span>}
+                    message={<span id="message-id">{this.state.snackbarMsg}</span>}
                 />
-                 {this.state.showAlert &&
+                {this.state.showAlert &&
                     <div>
                         {
-                            
+
                             this.state.alert == 1 ? <Alert severity="success">User Login Successfully!!</Alert>
                                 : <Alert severity="error">Login Fail!</Alert>
                         }
@@ -154,8 +159,8 @@ class LogIn extends Component {
                                         <div className="footer">
                                             <div className="signIn">
                                                 <Button color="primary">
-                                                <Link to={{ pathname: `/signup` }}>Create Account</Link>                                              
-                                            </Button>
+                                                    <Link to={{ pathname: `/signup` }}>Create Account</Link>
+                                                </Button>
                                             </div>
                                             <div className="button">
                                                 <Button variant="contained" color="primary">SignIn</Button>

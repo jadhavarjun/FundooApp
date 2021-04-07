@@ -6,6 +6,8 @@ let axiosService = new AxiosServices();
 
 let baseUrl = "http://localhost:3000";
 
+let headers = {'token':localStorage.getItem('token')}
+
 // let axiosService = new AxiosService();
 export default class UserServices{
     registration = (data) =>{
@@ -20,5 +22,9 @@ export default class UserServices{
     resetPassword = (data, token) =>{
         console.log("sssssssssssssssssssss");
         return axiosService.postMethod(`${baseUrl}/user/resetPassword/${token}`,data)
+    }
+    getAllNotes = () =>{
+        console.log("sssssssssssssssssssss");
+        return axiosService.getMethod(`${baseUrl}/note`, headers)
     }
 }

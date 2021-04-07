@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import icon from '../../Assets/keep.png'
 import CreateNotes from '../Dashboard/note/CreateNotes'
@@ -19,6 +19,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import './Appbar.css'
 
+import UserServices from '../../services/userService';
+let userServices = new UserServices();
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -38,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "none",
     },
 
-    inputRoot:{
-        marginLeft:15
+    inputRoot: {
+        marginLeft: 15
     },
 
     hide: {
@@ -79,13 +82,13 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(10),
-      },
+        padding: theme.spacing(13),
+    },
 }));
 
 export default function MiniDrawer() {
     const classes = useStyles();
-    
+
     const [open, setOpen] = React.useState(false);
 
     const drawerOpen = () => {
@@ -106,6 +109,17 @@ export default function MiniDrawer() {
     const [note, setNote] = React.useState(true)
     const [reminder, setReminder] = React.useState(false)
 
+    useEffect(() => {
+        userServices.getAllNotes()
+        .then((result) => {
+            setNote(result.data)
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+
+    },[])
 
 
     return (
@@ -148,7 +162,7 @@ export default function MiniDrawer() {
                         <label htmlFor="contained-button-file">
                             <IconButton className="avtar_btn">
                                 <Avatar
-                                    src="/images/example.jpg"
+                                    // src="/images/example.jpg"
                                 />
                             </IconButton>
                         </label>
@@ -260,8 +274,17 @@ export default function MiniDrawer() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-            <CreateNotes/>
+                <CreateNotes />
+                {console.log("/////////////////////////////,,,",note[0])}
+                {note.length > 0 && note.map((obj)=>{
+                    return <div className="card">
+                        <div>{obj.title}</div>
+                        <div>{obj.description}</div>
+                    </div>
+                })}
+                
             </main>
+            
         </div>
     );
 }

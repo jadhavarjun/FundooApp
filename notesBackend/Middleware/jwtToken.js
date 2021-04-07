@@ -39,6 +39,7 @@ class JWTToken {
         console.log("from tokenverify")
         // var token = req.body['login_key'];
         let token = req.headers.token;
+        console.log("????????????????????????????????n",req.headers);
         if (token) {
             jwt.verify(token, process.env.JWT_LOGIN_KEY, (err, decoded) => {
                 if (err) {

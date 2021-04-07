@@ -6,4 +6,9 @@ export default class AxiosServices {
         console.log("aaaaaaaaaaaaaaa",url,data);
         return axios.post(url, data)
     }
+
+    getMethod = (url, headers) => {
+        console.log("aaaaaaaaaaaaaaa",headers.token);
+        return axios.get(url, {headers:{'token':`${headers.token}`}})
+    }
 }
