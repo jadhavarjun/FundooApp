@@ -1,6 +1,6 @@
 .container{
-    /* width: 600px; */
-  
+    /* display: flex; */
+    justify-content: center;
 }
 .addnotetitle{
     height: 50px;
@@ -24,4 +24,25 @@
 
 .close_btn{
     font-family: system-ui;
+}
+@media only screen and (max-width: 600px) {
+    .headerIcon {
+        width: 30px;
+    }
+
+    .search_box {
+        margin: 5px 5px 5px 25px;
+        height: 50px;
+        width: 140px;
+        display: flex;
+        align-items: center;
+        background-color: rgb(238, 238, 238);
+        border-radius: 8px;
+    }
+    .img{
+        margin-top: 10px;
+    }
+    .avtar_btn_div {
+        margin-left: 90px;
+    }
 }

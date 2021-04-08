@@ -2,9 +2,9 @@ import axios from 'axios';
 
 export default class AxiosServices {
 
-    postMethod = (url, data) => {
+    postMethod = (url, data, headers=false) => {
         console.log("aaaaaaaaaaaaaaa",url,data);
-        return axios.post(url, data)
+        return axios.post(url, data, {headers:{'token':`${headers.token}`}})
     }
 
     getMethod = (url, headers) => {

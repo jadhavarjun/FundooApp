@@ -6,22 +6,44 @@ import ToggleDisplay from 'react-toggle-display';
 import NoteIcons from '../NoteIcons/icons'
 import './CreateNotes.css'
 
+import UserServices from '../../../services/userService';
+let userServices = new UserServices();
 
 class Note extends Component {
     constructor() {
         super();
-
         this.state = {
             show: true,
-            notetitle: null,
-            notedata: null
+            note: []
         }
-
     }
 
     handleClickShow=()=> {
         this.setState({
             show: !this.state.show
+        });
+    }
+
+    handleChange = (key, value) =>{
+        const {note} = this.state
+        note[key] = value
+        console.log(note);
+        this.setState({ note })
+    }
+
+    handleSubmit=(e)=>{
+        e.preventDefault();
+        const {note} = this.state
+        let data = {
+            title: note.title,
+            description: note.description
+        }
+        userServices.createNotes(data)
+        .then((result) => {
+            window.location.reload();
+           console.log(result); 
+        }).catch((err) => {
+            console.log(err);
         });
     }
 
@@ -43,7 +65,7 @@ class Note extends Component {
                     </Card>
                 </ToggleDisplay>
 
-                <form id="submit-form">
+                <form id="submit-form" onClick={this.handleSubmit}>
                     <ToggleDisplay show={!this.state.show}>
                         <Card className="addnotedata">
 
@@ -54,6 +76,7 @@ class Note extends Component {
                                     type="text"
                                     placeholder="Title"
                                     onInput={e => this.setState({ notetitle: e.target.value })}
+                                    onChange={(e) => this.handleChange("title", e.target.value)}
                                 />
                             </div>
 
@@ -63,7 +86,7 @@ class Note extends Component {
                                 type="text"
                                 placeholder="Take a note..."
                                 onInput={e => this.setState({ notedata: e.target.value })}
-
+                                onChange={(e) => this.handleChange("description", e.target.value)}
                             />
                             <div className="bottom_bar">
                                 <NoteIcons />

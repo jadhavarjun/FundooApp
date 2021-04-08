@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import icon from '../../Assets/keep.png'
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import CreateNotes from '../Dashboard/note/CreateNotes'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,6 +21,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import './Appbar.css'
+import GetNote from './GetNote/getNote'
 
 import UserServices from '../../services/userService';
 let userServices = new UserServices();
@@ -86,9 +90,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
     const classes = useStyles();
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
 
     const drawerOpen = () => {
@@ -103,27 +108,43 @@ export default function MiniDrawer() {
         setOpen(!open);
     };
 
-    const [trash, setTrash] = React.useState(false)
-    const [editLabel, setEditLabel] = React.useState(false)
-    const [archive, setArchive] = React.useState(false)
-    const [note, setNote] = React.useState(true)
-    const [reminder, setReminder] = React.useState(false)
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const logout = (e) => {
+        // e.preventDefault()
+        localStorage.removeItem("token");
+        localStorage.removeItem('userid');
+        localStorage.removeItem('email');
+        props.history.push("/login")
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const [trash] = React.useState(null)
+    const [editLabel] = React.useState(null)
+    const [archive] = React.useState(null)
+    const [note, setNote] = React.useState([])
+    const [reminder] = React.useState(null)
 
     useEffect(() => {
         userServices.getAllNotes()
-        .then((result) => {
-            setNote(result.data)
-            console.log(result);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then((result) => {
+                setNote(result.data)
+                // console.log(result);
+            })
+            .catch((error) => {
+                // console.log(error);
+            })
 
-    },[])
+    }, [])
 
 
     return (
-        <div className={classes.root}>
+        <div>
             <CssBaseline />
             <AppBar
                 position="fixed"
@@ -159,13 +180,19 @@ export default function MiniDrawer() {
                         </div>
                     </div>
                     <div className="avtar_btn_div">
-                        <label htmlFor="contained-button-file">
-                            <IconButton className="avtar_btn">
-                                <Avatar
-                                    // src="/images/example.jpg"
-                                />
-                            </IconButton>
-                        </label>
+                        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                            <Avatar />
+                        </Button>
+                        <Menu
+                            style={{ marginTop: 50 }}
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                        // onClose={handleClose}
+                        >
+                            <MenuItem onClick={e => logout(e)}>Logout</MenuItem>
+                        </Menu>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -272,19 +299,22 @@ export default function MiniDrawer() {
                     </div>
                 </div>
             </Drawer>
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <CreateNotes />
-                {console.log("/////////////////////////////,,,",note[0])}
-                {note.length > 0 && note.map((obj)=>{
-                    return <div className="card">
-                        <div>{obj.title}</div>
-                        <div>{obj.description}</div>
-                    </div>
-                })}
-                
-            </main>
-            
+            <div>
+                <main className={classes.content}>
+                    <CreateNotes />
+                </main>
+                {/* <div className={classes.toolbar} >
+                    {note.length > 0 && note.map((obj) => {
+                        return <div className="card">
+                            <div>{obj.title}</div>
+                            <div>{obj.description}</div>
+                        </div>
+                    })}
+                </div> */}
+                <div>
+                <GetNote/>
+                </div>
+            </div>
         </div>
     );
 }

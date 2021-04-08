@@ -28,10 +28,10 @@ class LogIn extends Component {
 
     handleChange = (key, value) => {
         const { user } = this.state;
-        user[key] = value;
+        this.state.user[key] = value;
         this.setState({ emailError: false, passwordError: false, snackbarOpen: false })
         this.setState({ emailErrorMsg: "", passwordErrorMsg: "" })
-
+        
         this.setState({ user })
     }
 
@@ -76,6 +76,7 @@ class LogIn extends Component {
                     localStorage.setItem('email', result.data.data.email);
 
                     console.log(result);
+                    // window.location.realod();
                     this.props.history.push('/appbar');
                 })
                 .catch((error) => {
@@ -88,6 +89,7 @@ class LogIn extends Component {
     }
 
     render() {
+        const {emailError, emailErrorMsg, passwordError, passwordErrorMsg} = this.state
         return (
             <div className="container">
                 <Snackbar
@@ -111,14 +113,6 @@ class LogIn extends Component {
                     <div className="border">
                         <div className="login_box">
                             <div className="login_input">
-                                {/* <div className="login_logo">
-                                <font color="#1976d2"><b>F</b></font>
-                                <font color="#FF0000"><b>u</b></font>
-                                <font color="#FFD700"><b>n</b></font>
-                                <font color="#1976d2"><b>d</b></font>
-                                <font color="#FF0000 "><b>o</b></font>
-                                <font color="#006400"><b>o</b></font>
-                            </div> */}
                                 <FundooLogo />
                                 <div>
                                     <h1 className="h1">Sign In</h1>
@@ -131,8 +125,8 @@ class LogIn extends Component {
                                                 <TextField id="outlined"
                                                     size="small"
                                                     label="Email"
-                                                    error={this.state.emailError}
-                                                    helperText={this.state.emailErrorMsg}
+                                                    error={emailError}
+                                                    helperText={emailErrorMsg}
                                                     onChange={(e) => this.handleChange("email", e.target.value)}
                                                     variant="outlined"
                                                     fullWidth />
@@ -142,8 +136,8 @@ class LogIn extends Component {
                                                 <TextField id="outlined"
                                                     size="small"
                                                     label="Password"
-                                                    error={this.state.passwordError}
-                                                    helperText={this.state.passwordErrorMsg}
+                                                    error={passwordError}
+                                                    helperText={passwordErrorMsg}
                                                     onChange={(e) => this.handleChange("password", e.target.value)}
                                                     type="password"
                                                     variant="outlined"

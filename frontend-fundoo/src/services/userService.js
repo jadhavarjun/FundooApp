@@ -27,4 +27,8 @@ export default class UserServices{
         console.log("sssssssssssssssssssss");
         return axiosService.getMethod(`${baseUrl}/note`, headers)
     }
+    createNotes = (data) =>{
+        console.log("sssssssssssssssssssss");
+        return axiosService.postMethod(`${baseUrl}/note`, data, headers)
+    }
 }
