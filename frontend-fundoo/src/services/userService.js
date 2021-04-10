@@ -20,23 +20,18 @@ export default class UserServices{
         return axiosService.postMethod(`${baseUrl}/login`,data)
     }
     resetPassword = (data, token) =>{
-        console.log("sssssssssssssssssssss");
         return axiosService.postMethod(`${baseUrl}/user/resetPassword/${token}`,data)
     }
     getAllNotes = () =>{
-        console.log("sssssssssssssssssssss");
         return axiosService.getMethod(`${baseUrl}/note`, headers)
     }
     createNotes = (data) =>{
-        console.log("sssssssssssssssssssss");
         return axiosService.postMethod(`${baseUrl}/note`, data, headers)
     }
     updateNote = (data, id) =>{
-        console.log("sssssssssssssssssssss");
         return axiosService.putMethod(`${baseUrl}/note/${id}`, data, headers)
     }
     deleteNote = (id) =>{
-        console.log("sssssssssssssssssssss");
         return axiosService.deleteMethod(`${baseUrl}/note/${id}`, headers)
     }
 }

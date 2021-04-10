@@ -142,14 +142,14 @@ class NoteController {
             noteService.getUserAllNotes(id)
                 .then((result) => {
                     console.log("Loading Data from database");
-                    redisCache.loadCache(id, result.data)
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
+                    redisCache.loadCache(id, response)
                     res.status(result.status).send(response);
                 }).catch((err) => {
                     response.flag = false;
-                    response.data = err.message;
+                    response.message = err.message;
                     res.status(err.status).send(response);
                 });
         } catch (error) {

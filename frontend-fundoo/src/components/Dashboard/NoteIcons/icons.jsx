@@ -37,6 +37,7 @@ class NoteIcons extends Component {
         .then((result) => {
             console.log(result)
             this.handleClose()
+            this.props.getNotes();
         })
         .catch((error) => {
             console.log(error);

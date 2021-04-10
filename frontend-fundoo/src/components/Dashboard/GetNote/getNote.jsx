@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { Modal} from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 
 import './getNote.css'
 import NoteIcon from '../NoteIcons/icons'
@@ -27,13 +27,14 @@ class GetNotes extends Component {
         createNote: []
     }
     componentDidMount = () => {
+        console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCC")
         this.fetchNote();
     }
     fetchNote = () => {
         userServices.getAllNotes()
             .then((result) => {
-                this.setState({ note: result.data })
-                console.log(result);
+                this.setState({ note: result.data.data })
+                console.log(";;;;;;;;;;;;", result.data.data)
             })
             .catch((error) => {
                 console.log(error);
@@ -160,15 +161,12 @@ class GetNotes extends Component {
                         </div> */}
                     </form>
                 </div>
-                        
+
 
                 <div className='noteList'>
-                    {this.state.note.length > 0 ? 
+                    {this.state.note.length > 0 ?
                         <div className='noteList2' >
                             {this.state.note.map((item) => {
-                                const id = item.id
-                                const title = item.title
-                                const description = item.description
                                
                                 return <div>
                                     <div className='note'>
@@ -177,13 +175,13 @@ class GetNotes extends Component {
                                             <p>{item.description}</p>
                                         </div>
                                         <div className='icons'>
-                                            <NoteIcon id={item._id} />
+                                            <NoteIcon id={item._id} getNotes={this.fetchNote} />
                                         </div>
                                     </div>
                                 </div>
                             })}
                         </div>
-                         : null} 
+                        : null}
                     <Modal
                         show={this.state.show}
                         className="model-lg"
