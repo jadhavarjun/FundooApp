@@ -11,4 +11,14 @@ export default class AxiosServices {
         console.log("aaaaaaaaaaaaaaa",headers.token);
         return axios.get(url, {headers:{'token':`${headers.token}`}})
     }
+
+    putMethod = (url, data, headers=false) => {
+        console.log("aaaaaaaaaaaaaaa",headers.token);
+        return axios.put(url, data, {headers:{'token':`${headers.token}`}})
+    }
+
+    deleteMethod = (url, headers=false) => {
+        console.log("aaaaaaaaaaaaaaa",headers.token);
+        return axios.delete(url, {headers:{'token':`${headers.token}`}})
+    }
 }

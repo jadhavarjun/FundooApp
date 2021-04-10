@@ -77,7 +77,7 @@ class LogIn extends Component {
 
                     console.log(result);
                     // window.location.realod();
-                    this.props.history.push('/appbar');
+                    this.props.history.push('/dashboard');
                 })
                 .catch((error) => {
                     // this.setState({ alert: 2, showAlert: true })

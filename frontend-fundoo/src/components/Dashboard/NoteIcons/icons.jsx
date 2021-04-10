@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Input, Button } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,22 +10,39 @@ import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
 import './Icons.css'
 
+import UserServices from '../../../services/userService';
+let userServices = new UserServices();
 
 class NoteIcons extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             anchorEl: null,
+            deleteId: this.props.id,
         }
     }
+    
     handleClick = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
 
     handleClose = () => {
+        console.log(this.state.deleteId);
         this.setState({ anchorEl: null });
     };
+
+    deleteNote=()=>{
+        userServices.deleteNote(this.state.deleteId)
+        .then((result) => {
+            console.log(result)
+            this.handleClose()
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    this.setState({ show: false })
+    }
     render() {
         const { anchorEl } = this.state;
         return (
@@ -63,7 +79,7 @@ class NoteIcons extends Component {
                         open={Boolean(anchorEl)}
                         onClose={this.handleClose}
                     >
-                        <MenuItem onClick={this.handleClose}>Delete note</MenuItem>
+                        <MenuItem onClick={this.deleteNote}>Delete note</MenuItem>
                         <MenuItem onClick={this.handleClose}>Add label</MenuItem>
                     </Menu>
 

@@ -4,7 +4,6 @@ import icon from '../../Assets/keep.png'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import CreateNotes from '../Dashboard/note/CreateNotes'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -20,7 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import './Appbar.css'
+import './Dashboard.css'
 import GetNote from './GetNote/getNote'
 
 import UserServices from '../../services/userService';
@@ -124,24 +123,7 @@ export default function MiniDrawer(props) {
         setAnchorEl(null);
     };
 
-    const [trash] = React.useState(null)
-    const [editLabel] = React.useState(null)
-    const [archive] = React.useState(null)
-    const [note, setNote] = React.useState([])
-    const [reminder] = React.useState(null)
-
-    useEffect(() => {
-        userServices.getAllNotes()
-            .then((result) => {
-                setNote(result.data)
-                // console.log(result);
-            })
-            .catch((error) => {
-                // console.log(error);
-            })
-
-    }, [])
-
+    const note = true;
 
     return (
         <div>
@@ -189,8 +171,9 @@ export default function MiniDrawer(props) {
                             anchorEl={anchorEl}
                             keepMounted
                             open={Boolean(anchorEl)}
-                        // onClose={handleClose}
+                            onClose={handleClose}
                         >
+                            <MenuItem><Avatar /></MenuItem>
                             <MenuItem onClick={e => logout(e)}>Logout</MenuItem>
                         </Menu>
                     </div>
@@ -234,7 +217,7 @@ export default function MiniDrawer(props) {
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
-                                    style={{ backgroundColor: reminder ? "#feefc3" : "transparent" }}
+                                // style={{ backgroundColor: reminder ? "#feefc3" : "transparent" }}
 
                                 >
                                     <ListItemIcon>
@@ -252,7 +235,7 @@ export default function MiniDrawer(props) {
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
-                                    style={{ backgroundColor: editLabel ? "#feefc3" : "transparent" }}
+                                // style={{ backgroundColor: editLabel ? "#feefc3" : "transparent" }}
 
                                 >
                                     <ListItemIcon>
@@ -268,7 +251,7 @@ export default function MiniDrawer(props) {
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
-                                    style={{ backgroundColor: archive ? "#feefc3" : "transparent" }}
+                                // style={{ backgroundColor: archive ? "#feefc3" : "transparent" }}
 
                                 >
                                     <ListItemIcon>
@@ -284,7 +267,7 @@ export default function MiniDrawer(props) {
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
-                                    style={{ backgroundColor: trash ? "#feefc3" : "transparent" }}
+                                // style={{ backgroundColor: trash ? "#feefc3" : "transparent" }}
 
                                 >
                                     <ListItemIcon>
@@ -301,19 +284,9 @@ export default function MiniDrawer(props) {
             </Drawer>
             <div>
                 <main className={classes.content}>
-                    <CreateNotes />
+                    <GetNote />
                 </main>
-                {/* <div className={classes.toolbar} >
-                    {note.length > 0 && note.map((obj) => {
-                        return <div className="card">
-                            <div>{obj.title}</div>
-                            <div>{obj.description}</div>
-                        </div>
-                    })}
-                </div> */}
-                <div>
-                <GetNote/>
-                </div>
+
             </div>
         </div>
     );

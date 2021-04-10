@@ -1,3 +1,7 @@
 .deleteNote{
     margin-top: 50x;
+
+}
+.img{
+    min-inline-size: max-content;
 }

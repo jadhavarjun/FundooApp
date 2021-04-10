@@ -1,19 +1,18 @@
 /* @import './values.scss'; */
 .noteList2 {
-    /* position: absolute; */
-    margin-left: 25%;
-    /* // border: solid; */
-    margin-right: 10% auto;
+    position: absolute;
+    margin-left: auto;
     display: flex;
     flex-wrap: wrap;
     columns: 4;
-    /* // width: 200px;
-    // column-gap: 5px; */
+    /* /* // width: 200px; */
+    column-gap: 5px; 
     /* flex-direction: row; */
 }
 
-.note {
-    width: 200px;
+.note,
+.icon {
+    width: 293px;
     color: rgb(15, 15, 15);
     /* display: inline-block; */
     margin-left: 1px;
@@ -29,8 +28,9 @@
     background-color: transparent;
 }
 
+
 .note:hover {
-    width: 200px;
+    width: 293px;
     margin-left: 1px;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -57,4 +57,85 @@
     border: none;
     background: none;
     color: rgb(87, 85, 85);
+}
+
+.update_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    border: none;
+}
+
+.description {
+    border: none;
+}
+
+.title:focus {
+    border: none;
+}
+
+.model-close {
+    border: none;
+    background-color: white;
+    font-family: 'Circular-Loom';
+}
+.close_btn{
+    justify-content: flex-end;
+    display: flex;
+}
+
+.icon_closebtn{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container{
+    /* display: flex; */
+    justify-content: center;
+}
+.addnotetitle{
+    height: 50px;
+}
+
+.addnotetitleinput{
+    margin-top: 10px;
+    margin-left: 10px;
+    /* font-family: 'Circular-Loom'; */
+}
+.addtitleinput, .addnoteinput{
+    height: 50px;
+    margin-left: 10px;
+}
+
+.bottom_bar{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+}
+
+.close_btn{
+    font-family: system-ui;
+}
+@media only screen and (max-width: 600px) {
+    .headerIcon {
+        width: 30px;
+    }
+
+    .search_box {
+        margin: 5px 5px 5px 25px;
+        height: 50px;
+        width: 140px;
+        display: flex;
+        align-items: center;
+        background-color: rgb(238, 238, 238);
+        border-radius: 8px;
+    }
+    .img{
+        margin-top: 10px;
+    }
+    .avtar_btn_div {
+        margin-left: 90px;
+    }
 }
