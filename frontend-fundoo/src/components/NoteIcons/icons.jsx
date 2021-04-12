@@ -10,7 +10,7 @@ import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
 import './Icons.css'
 
-import UserServices from '../../../services/userService';
+import UserServices from '../../services/userService';
 let userServices = new UserServices();
 
 class NoteIcons extends Component {

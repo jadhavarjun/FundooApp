@@ -19,8 +19,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from 'react-router-dom';
 import './Dashboard.css'
-import GetNote from './GetNote/getNote'
+import ProtectedRoutes from '../../protectedRoute'
+import GetNote from '../Note/getNote'
+import TrashNote from '../Note/TrashNote/trashNote'
 
 import UserServices from '../../services/userService';
 let userServices = new UserServices();
@@ -28,6 +31,7 @@ let userServices = new UserServices();
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
+
     root: {
         display: 'flex',
     },
@@ -85,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(13),
+        marginTop: "10%",
     },
 }));
 
@@ -94,6 +98,12 @@ export default function MiniDrawer(props) {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
+    const [getNote, setGetNote] = React.useState(true)
+    // const [trashNote, setTrashNote] = React.useState(false)
+    const [note, setNote] = React.useState(true)
+    const [archive, setArchive] = React.useState(false)
+    const [trash, setTrash] = React.useState(false);
+    // const [anchor, setAnchor] = React.useState(null);
 
     const drawerOpen = () => {
         setOpen(true);
@@ -110,6 +120,9 @@ export default function MiniDrawer(props) {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+    const nextPath = (path) => {
+        props.history.push(path);
+    };
 
     const logout = (e) => {
         // e.preventDefault()
@@ -123,7 +136,27 @@ export default function MiniDrawer(props) {
         setAnchorEl(null);
     };
 
-    const note = true;
+    const noteSelect = () => {
+        setNote(true);
+        setArchive(false);
+        setTrash(false);
+        nextPath("/dashboard/notes");
+    };
+
+    const archiveSelect = () => {
+        setNote(false);
+        setArchive(true);
+        setTrash(false);
+        nextPath("/dashboard/archive");
+    };
+    const trashSelect = () => {
+        setNote(false);
+        setArchive(false);
+        setTrash(true);
+        nextPath("/dashboard/trash");
+    };
+
+    // const note = true;
 
     return (
         <div>
@@ -197,7 +230,7 @@ export default function MiniDrawer(props) {
                 <div className="drawer_container">
                     <div className="drawerList">
                         <List>
-                            <div className="btn_drawer">
+                            <div className="btn_drawer" onClick={noteSelect}>
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
@@ -247,11 +280,11 @@ export default function MiniDrawer(props) {
                                 </ListItem>
                             </div>
 
-                            <div className="btn_drawer">
+                            <div className="btn_drawer" onClick={archiveSelect}>
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
-                                // style={{ backgroundColor: archive ? "#feefc3" : "transparent" }}
+                                style={{ backgroundColor: archive ? "#feefc3" : "transparent" }}
 
                                 >
                                     <ListItemIcon>
@@ -262,13 +295,11 @@ export default function MiniDrawer(props) {
                                     <ListItemText primary="Archive" />
                                 </ListItem>
                             </div>
-
-                            <div className="btn_drawer">
+                            <div className="btn_drawer" onClick={trashSelect}>
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
-                                // style={{ backgroundColor: trash ? "#feefc3" : "transparent" }}
-
+                                style={{ backgroundColor: trash ? "#feefc3" : "transparent" }}
                                 >
                                     <ListItemIcon>
                                         <svg width="28" height="28" viewBox="0 0 24 24">
@@ -284,10 +315,15 @@ export default function MiniDrawer(props) {
             </Drawer>
             <div>
                 <main className={classes.content}>
-                    <GetNote />
+                    <ProtectedRoutes path="/dashboard/notes">
+                        <GetNote />
+                    </ProtectedRoutes>
+                    <ProtectedRoutes path="/dashboard/trash">
+                        <TrashNote />
+                    </ProtectedRoutes>
                 </main>
-
             </div>
+
         </div>
     );
 }

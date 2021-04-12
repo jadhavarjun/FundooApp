@@ -1,14 +1,13 @@
 import React from 'react';
 import { Component } from 'react';
 import { Modal } from 'react-bootstrap'
-
 import './getNote.css'
-import NoteIcon from '../NoteIcons/icons'
-import { Input, Button } from '@material-ui/core';
+import { Input, Button, Typography  } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import ToggleDisplay from 'react-toggle-display';
-
-import UserServices from '../../../services/userService';
+import NoteIcon from '../NoteIcons/icons'
+import TrashNote from './TrashNote/trashNote'
+import UserServices from '../../services/userService';
 let userServices = new UserServices();
 
 class GetNotes extends Component {
@@ -25,16 +24,15 @@ class GetNotes extends Component {
         description: '',
         createShow: true,
         createNote: []
-    }
+    }    
     componentDidMount = () => {
-        console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCC")
         this.fetchNote();
     }
     fetchNote = () => {
         userServices.getAllNotes()
             .then((result) => {
                 this.setState({ note: result.data.data })
-                console.log(";;;;;;;;;;;;", result.data.data)
+                // console.log(result.data.data)
             })
             .catch((error) => {
                 console.log(error);
@@ -104,6 +102,7 @@ class GetNotes extends Component {
             }).catch((err) => {
                 console.log(err);
             });
+            this.setState({title:""})
     }
 
 
@@ -149,7 +148,7 @@ class GetNotes extends Component {
                                     onChange={(e) => this.handleChange("description", e.target.value)}
                                 />
                                 <div className="bottom_bar">
-                                    <NoteIcon />
+                                    <NoteIcon className="icons"/>
                                     <div className="close_btn">
                                         <Button id="closebutton" type="submit" onClick={() => { this.handleClickShow() }}>Close</Button>
                                     </div>
@@ -165,23 +164,27 @@ class GetNotes extends Component {
 
                 <div className='noteList'>
                     {this.state.note.length > 0 ?
-                        <div className='noteList2' >
-                            {this.state.note.map((item) => {
-                               
-                                return <div>
-                                    <div className='note'>
-                                        <div onClick={(e) => this.showModal(e, item._id, item.title, item.description)}>
-                                            <span> {item.title}</span>
-                                            <p>{item.description}</p>
-                                        </div>
-                                        <div className='icons'>
-                                            <NoteIcon id={item._id} getNotes={this.fetchNote} />
+                        <div className="displayNotes" >
+                            <div className="flex_card">
+                                {this.state.note.filter((obj)=> obj.isTrash != true && obj.isArchive != true).map((item) => {
+                                    return <div>
+                                        <div className='note_box'>
+                                            <div className="input_box" onClick={(e) => this.showModal(e, item._id, item.title, item.description)}>
+                                                <h5 className="textField"> {item.title}</h5>
+                                                <Typography className="textField">{item.description}</Typography>
+                                            </div>
+                                            <div className="option_container">
+                                                <div className='icon_option'>
+                                                    <NoteIcon id={item._id} getNotes={this.fetchNote} />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            })}
+                                })}
+                            </div>
                         </div>
                         : null}
+
                     <Modal
                         show={this.state.show}
                         className="model-lg"
