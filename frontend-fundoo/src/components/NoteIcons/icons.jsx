@@ -22,7 +22,7 @@ class NoteIcons extends Component {
             deleteId: this.props.id,
         }
     }
-    
+
     handleClick = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
@@ -32,17 +32,45 @@ class NoteIcons extends Component {
         this.setState({ anchorEl: null });
     };
 
-    deleteNote=()=>{
+    deleteNoteForever = () => {
         userServices.deleteNote(this.state.deleteId)
-        .then((result) => {
-            console.log(result)
-            this.handleClose()
-            this.props.getNotes();
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    this.setState({ show: false })
+            .then((result) => {
+                console.log(result)
+                this.handleClose()
+                // this.props.getNotes();
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        this.setState({ show: false })
+    }
+
+    deleteNote = () => {
+        userServices.trashNote(this.state.deleteId)
+            .then((result) => {
+                console.log(result)
+                this.handleClose()
+                this.props.getNotes();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        this.setState({ show: false })
+    }
+
+    archive = () => {
+        console.log("DDDDDDddddddd", this.state.deleteId);
+        userServices.archiveNote(this.state.deleteId)
+            .then((result) => {
+                console.log(result)
+                this.handleClose()
+                this.props.getNotes();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        this.setState({ show: false })
     }
     render() {
         const { anchorEl } = this.state;
@@ -61,7 +89,7 @@ class NoteIcons extends Component {
                     <IconButton id="notebuttons">
                         <InsertPhotoOutlinedIcon alt="Photo" />
                     </IconButton>
-                    <IconButton id="notebuttons">
+                    <IconButton id="notebuttons" onClick={this.archive}>
                         <ArchiveOutlinedIcon />
                     </IconButton>
 
@@ -80,8 +108,9 @@ class NoteIcons extends Component {
                         open={Boolean(anchorEl)}
                         onClose={this.handleClose}
                     >
-                        <MenuItem onClick={this.deleteNote}>Delete note</MenuItem>
+                        
                         <MenuItem onClick={this.handleClose}>Add label</MenuItem>
+                        {window.location.href == "http://localhost:3001/dashboard/trash" ? <MenuItem onClick={this.deleteNoteForever}>Delete note forever</MenuItem> : <MenuItem onClick={this.deleteNote}>Delete note</MenuItem>}
                     </Menu>
 
                 </div>

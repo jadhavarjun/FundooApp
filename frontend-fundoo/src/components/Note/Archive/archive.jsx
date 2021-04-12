@@ -6,7 +6,7 @@ import NoteIcon from '../../NoteIcons/icons'
 import UserServices from '../../../services/userService';
 let userServices = new UserServices();
 
-class TrashNote extends Component {
+class ArchiveNote extends Component {
     constructor(props){
         super(props)
         this.state={
@@ -30,8 +30,8 @@ class TrashNote extends Component {
                 {this.state.note.length > 0 ?
                     <div className="displayNotes" >
                         <div className="flex_card">
-                            {this.state.note.filter((obj) => obj.isTrash == true).map((item) => {
-
+                            {this.state.note.filter((obj) => obj.isArchive == true).map((item) => {
+                                console.log("itnrmejrirororoor",item)
                                 return <div>
                                     <div className='note_box'>
                                         <div className="input_box" onClick={(e) => this.showModal(e, item._id, item.title, item.description)}>
@@ -54,4 +54,4 @@ class TrashNote extends Component {
         )
     }
 }
-export default TrashNote;
+export default ArchiveNote;

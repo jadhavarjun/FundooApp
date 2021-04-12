@@ -24,6 +24,7 @@ import './Dashboard.css'
 import ProtectedRoutes from '../../protectedRoute'
 import GetNote from '../Note/getNote'
 import TrashNote from '../Note/TrashNote/trashNote'
+import ArchiveNote from '../Note/Archive/archive'
 
 import UserServices from '../../services/userService';
 let userServices = new UserServices();
@@ -284,7 +285,7 @@ export default function MiniDrawer(props) {
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
-                                style={{ backgroundColor: archive ? "#feefc3" : "transparent" }}
+                                    style={{ backgroundColor: archive ? "#feefc3" : "transparent" }}
 
                                 >
                                     <ListItemIcon>
@@ -299,7 +300,7 @@ export default function MiniDrawer(props) {
                                 <ListItem
                                     button
                                     className={classes.iconDrawer}
-                                style={{ backgroundColor: trash ? "#feefc3" : "transparent" }}
+                                    style={{ backgroundColor: trash ? "#feefc3" : "transparent" }}
                                 >
                                     <ListItemIcon>
                                         <svg width="28" height="28" viewBox="0 0 24 24">
@@ -321,6 +322,10 @@ export default function MiniDrawer(props) {
                     <ProtectedRoutes path="/dashboard/trash">
                         <TrashNote />
                     </ProtectedRoutes>
+                    <ProtectedRoutes path="/dashboard/archive">
+                        <ArchiveNote />
+                    </ProtectedRoutes>
+
                 </main>
             </div>
 
