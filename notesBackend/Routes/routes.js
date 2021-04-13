@@ -16,8 +16,9 @@ module.exports = (app) => {
     app.delete("/user/delete/:id", userController.delete);
     //notes routes
     app.post("/note",validator.createNote,validate.validation,jwtToken.tokenVerify,noteController.noteCreate);
-    app.put("/note/:id",validator.createNote,validate.validation,jwtToken.tokenVerify,noteController.updateNote);
+    app.put("/note/:id",jwtToken.tokenVerify,noteController.updateNote);
     app.delete("/note/:id", jwtToken.tokenVerify, noteController.deleteNote);
+    // app.put("/color_note/:id",jwtToken.tokenVerify,noteController.updateNote);
     app.get("/note", jwtToken.tokenVerify, redisCache.checkCache, noteController.getUserAllNotes);
     app.put("/note/:id/archive_note", jwtToken.tokenVerify, noteController.archiveNote);
     app.put("/note/:id/trash_note", jwtToken.tokenVerify, noteController.trashNote);

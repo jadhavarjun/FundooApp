@@ -23,7 +23,13 @@ class GetNotes extends Component {
         title: '',
         description: '',
         createShow: true,
-        createNote: []
+        createNote: [
+            {
+                title:"",
+                description:""
+            }
+        ]
+
     }    
     componentDidMount = () => {
         this.fetchNote();
@@ -32,7 +38,7 @@ class GetNotes extends Component {
         userServices.getAllNotes()
             .then((result) => {
                 this.setState({ note: result.data.data })
-                // console.log(result.data.data)
+                console.log(result.data.data)
             })
             .catch((error) => {
                 console.log(error);
@@ -98,11 +104,12 @@ class GetNotes extends Component {
         userServices.createNotes(data)
             .then((result) => {
                 this.fetchNote();
+                this.setState(createNote.title="",createNote.description="")
                 console.log(result);
             }).catch((err) => {
                 console.log(err);
             });
-            this.setState({title:""})
+            
     }
 
 
@@ -134,7 +141,7 @@ class GetNotes extends Component {
                                         disableUnderline={true}
                                         type="text"
                                         placeholder="Title"
-                                        onInput={e => this.setState({ notetitle: e.target.value })}
+                                        value={this.state.createNote.title}
                                         onChange={(e) => this.handleChange("title", e.target.value)}
                                     />
                                 </div>
@@ -144,7 +151,7 @@ class GetNotes extends Component {
                                     disableUnderline={true}
                                     type="text"
                                     placeholder="Take a note..."
-                                    onInput={e => this.setState({ notedata: e.target.value })}
+                                    value={this.state.createNote.description}
                                     onChange={(e) => this.handleChange("description", e.target.value)}
                                 />
                                 <div className="bottom_bar">
@@ -155,9 +162,6 @@ class GetNotes extends Component {
                                 </div>
                             </Card>
                         </ToggleDisplay>
-                        {/* <div>
-                            <GetNote />
-                        </div> */}
                     </form>
                 </div>
 
@@ -168,7 +172,7 @@ class GetNotes extends Component {
                             <div className="flex_card">
                                 {this.state.note.filter((obj)=> obj.isTrash != true && obj.isArchive != true).map((item) => {
                                     return <div>
-                                        <div className='note_box'>
+                                        <div className='note_box' style={{backgroundColor:item.colorNote}}>
                                             <div className="input_box" onClick={(e) => this.showModal(e, item._id, item.title, item.description)}>
                                                 <h5 className="textField"> {item.title}</h5>
                                                 <Typography className="textField">{item.description}</Typography>

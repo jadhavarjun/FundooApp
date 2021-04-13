@@ -8,6 +8,7 @@ import ColorLensOutlinedIcon from '@material-ui/icons/ColorLensOutlined';
 import InsertPhotoOutlinedIcon from '@material-ui/icons/InsertPhotoOutlined';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
+import ColorPalete from '../NoteIcons/colorPalete'
 import './Icons.css'
 
 import UserServices from '../../services/userService';
@@ -37,8 +38,8 @@ class NoteIcons extends Component {
             .then((result) => {
                 console.log(result)
                 this.handleClose()
-                // this.props.getNotes();
-                window.location.reload();
+                this.props.getNotes();
+                // window.location.reload();
             })
             .catch((error) => {
                 console.log(error);
@@ -60,7 +61,6 @@ class NoteIcons extends Component {
     }
 
     archive = () => {
-        console.log("DDDDDDddddddd", this.state.deleteId);
         userServices.archiveNote(this.state.deleteId)
             .then((result) => {
                 console.log(result)
@@ -78,19 +78,20 @@ class NoteIcons extends Component {
             <div className="bottom_bar">
                 <div className="img">
                     <IconButton id="notebuttons">
-                        <AddAlertOutlinedIcon alt="Rreminder" />
+                        <AddAlertOutlinedIcon alt="Rreminder" fontSize="small" />
                     </IconButton>
                     <IconButton id="notebuttons">
-                        <PersonAddOutlinedIcon alt="Collabrator" />
+                        <PersonAddOutlinedIcon alt="Collabrator" fontSize="small"/>
                     </IconButton>
                     <IconButton id="notebuttons">
-                        <ColorLensOutlinedIcon alt="Color" />
+                        {/* <ColorLensOutlinedIcon alt="Color" /> */}
+                        <ColorPalete id={this.props.id} getNotes={this.props.getNotes}/>
                     </IconButton>
                     <IconButton id="notebuttons">
-                        <InsertPhotoOutlinedIcon alt="Photo" />
+                        <InsertPhotoOutlinedIcon alt="Photo" fontSize="small"/>
                     </IconButton>
                     <IconButton id="notebuttons" onClick={this.archive}>
-                        <ArchiveOutlinedIcon />
+                        <ArchiveOutlinedIcon fontSize="small"/>
                     </IconButton>
 
                     <IconButton id="notebuttons"
@@ -98,7 +99,7 @@ class NoteIcons extends Component {
                         aria-haspopup="true"
                         onClick={this.handleClick}
                     >
-                        <MoreVertOutlinedIcon />
+                        <MoreVertOutlinedIcon fontSize="small"/>
                     </IconButton>
 
                     <Menu

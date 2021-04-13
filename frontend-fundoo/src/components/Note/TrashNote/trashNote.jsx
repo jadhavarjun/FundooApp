@@ -33,7 +33,7 @@ class TrashNote extends Component {
                             {this.state.note.filter((obj) => obj.isTrash == true).map((item) => {
 
                                 return <div>
-                                    <div className='note_box'>
+                                    <div className='note_box'  style={{backgroundColor:item.colorNote}}>
                                         <div className="input_box" onClick={(e) => this.showModal(e, item._id, item.title, item.description)}>
                                             <h5 className="textField"> {item.title}</h5>
                                             <Typography className="textField">{item.description}</Typography>

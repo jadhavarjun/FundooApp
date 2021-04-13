@@ -60,6 +60,7 @@ class NoteModel {
     }
 
     updateNote(id, newData) {
+        console.log("uuuuuuuppppppppppd");
         return userNoteModel.findByIdAndUpdate(id, newData)
             .then(result => {
                 return result;

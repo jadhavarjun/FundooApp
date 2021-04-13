@@ -8,7 +8,8 @@ import ForgotPassword from './components/Forgot_Password/forgot_password'
 import ResetPassword from './components/ResetPassword/resetPassword'
 import Appbar from './components/Dashboard/Dashboard'
 import GetNote from './components/Note/getNote'
-import TrashNote from './components/Note/TrashNote/trashNote'
+import ColorPalete from './components/NoteIcons/colorPalete'
+
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/forgot_password' exact component={ForgotPassword}></Route>
           <Route path='/resetPassword' component={ResetPassword}></Route>
           <Route path='/getnote' component={GetNote}></Route>
+          <Route path='/color' component={ColorPalete}></Route>
           <ProtectedRoutes  path='/dashboard'  component={Appbar}/>
           <Route path='/' component={LogIn}></Route>
         </Switch>

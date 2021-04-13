@@ -29,17 +29,17 @@ export default class UserServices{
         return axiosService.postMethod(`${baseUrl}/note`, data, headers)
     }
     updateNote = (data, id) =>{
+        
+        console.log("uuuuuuuuuuuuuuuussssssssss",id,data)
         return axiosService.putMethod(`${baseUrl}/note/${id}`, data, headers)
     }
     deleteNote = (id) =>{
         return axiosService.deleteMethod(`${baseUrl}/note/${id}`, headers)
     }
     trashNote = (id) =>{
-        console.log("uuuuuuuuuuuuuuuussssssssss",id)
         return axiosService.putMethod(`${baseUrl}/note/${id}/trash_note`,{}, headers)
     }
     archiveNote = (id) =>{
-        console.log("uuuuuuuuuuuuuuuussssssssss",id)
         return axiosService.putMethod(`${baseUrl}/note/${id}/archive_note`,{}, headers)
     }
 }
